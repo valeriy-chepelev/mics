@@ -1,0 +1,2278 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<SCL xmlns="http://www.iec.ch/61850/2003/SCL" xmlns:scl="http://www.iec.ch/61850/2003/SCL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="B" version="2007" xsi:schemaLocation="http://www.iec.ch/61850/2003/SCL D:/Sch2007B2014_01_22/SCL.xsd">
+  <Header id="BMRZ-152-KSZ definition file" nameStructure="IEDName" version="41" revision="200">
+	<Text>
+		======================================================================================================
+		ICD for IED BMRZ
+		Please refer to IED technical documentation for complete information
+		======================================================================================================
+		Adjust correctly MX apertures:
+		db in units of 0.001% reffering to inst.value;
+		zeroDb in units of 0.001*measured units;
+		dbAng in units of 0,0036 degree.
+
+		Power MX transmitted in primary values*1000, i.e. kVA, kW, kVAr; RFLO distance - in kilometers.
+		All measured MX transmitted in secondary values (amps,volts, ohms) unless otherwise specified in IED documentation.
+		Time settings typed "IngEx" all in milisecond.
+
+		For GOOSE use only GSE_GGIO1 objects, linked in IED to virtual IOs.
+
+		Use "CET 850" software to system engineering and GOOSE publishing/subscribing.
+		Use "Configurator-MT" software to IED configuration, to assign User_GAPC1 data and commands, to assign GOOSE virtual IOs.
+
+		For SettingGroups operate - set in IED "S717"=1.
+		For CSWI operate - set in IED "Input OU"=1.
+
+		(C) Mechanotronika  www.mtrele.ru
+		Support (toll-free in RU): 8-800-250-63-60
+		======================================================================================================
+	</Text>
+    <History>
+      <Hitem version="41" revision="00" what="BMRZ standard ICD file (Edition 2)" when="2022-07-08" who="ADG"/>
+	  <Hitem version="41" revision="01" what="GAPC_152KSZ41 extended by DO Rch1Min, DO Rch1MaxUbc2, DO Rch1MinUbc2" when="2022-09-12" who="ADG"/>
+	  <Hitem version="41" revision="200" what="GD BFPO" when="2023-08-03" who="OPA"/>
+    </History>
+  </Header>
+  <Communication>
+    <SubNetwork name="SN1" type="8-MMS">
+      <ConnectedAP apName="AP1" iedName="TEMPLATE">
+        <Address>
+          <P type="IP" xsi:type="tP_IP">0.0.0.0</P>
+          <P type="IP-SUBNET" xsi:type="tP_IP-SUBNET">255.255.255.0</P>
+          <P type="IP-GATEWAY" xsi:type="tP_IP-GATEWAY">0.0.0.0</P>
+          <P type="OSI-PSEL" xsi:type="tP_OSI-PSEL">00000001</P>
+          <P type="OSI-SSEL" xsi:type="tP_OSI-SSEL">0001</P>
+          <P type="OSI-TSEL" xsi:type="tP_OSI-TSEL">0001</P>
+        </Address>
+      </ConnectedAP>
+    </SubNetwork>
+  </Communication>
+  <IED name="TEMPLATE" type="BMRZ-152-KSZ-41" desc="" configVersion="1.0" originalSclVersion="2007" originalSclRevision="B" manufacturer="Mechanotronika" engRight="full">
+    <Services>
+      <ClientServices goose="true" unbufReport="true" bufReport="true"/>
+      <DynAssociation max="4"/>
+      <SettingGroups>
+        <SGEdit resvTms="true"/>
+      </SettingGroups>
+      <GetDirectory/>
+      <GetDataObjectDefinition/>
+      <DataObjectDirectory/>
+      <GetDataSetValue/>
+      <DataSetDirectory/>
+      <ConfDataSet max="10" maxAttributes="80" modify="false"/>
+      <DynDataSet max="10" maxAttributes="80"/>
+      <ReadWrite/>
+      <ConfReportControl max="10" bufMode="both" bufConf="false"/>
+      <GetCBValues/>
+      <ReportSettings cbName="Conf" datSet="Conf" rptID="Dyn" optFields="Dyn" bufTime="Dyn" trgOps="Dyn" intgPd="Dyn" resvTms="true" owner="true"/>
+      <GSESettings appID="Conf" cbName="Conf" datSet="Conf"/>
+      <ConfLNs fixLnInst="true" fixPrefix="true"/>
+      <GSEDir/>
+      <GOOSE max="4"/>
+      <FileHandling/>
+    </Services>
+    <AccessPoint name="AP1">
+		<Server>
+			<Private type="SchneiderElectric-IED-GOOSE">
+				<GooseReceive xmlns="http://www.schneider-electric.com/IEC61850/XMLSchema" max="128">
+					<Gxx>
+						<GI desc="" id="1" name="" ref="VIn01"/>
+						<GI desc="" id="2" name="" ref="VIn02"/>
+						<GI desc="" id="3" name="" ref="VIn03"/>
+						<GI desc="" id="4" name="" ref="VIn04"/>
+						<GI desc="" id="5" name="" ref="VIn05"/>
+						<GI desc="" id="6" name="" ref="VIn06"/>
+						<GI desc="" id="7" name="" ref="VIn07"/>
+						<GI desc="" id="8" name="" ref="VIn08"/>
+						<GI desc="" id="9" name="" ref="VIn09"/>
+						<GI desc="" id="10" name="" ref="VIn10"/>
+						<GI desc="" id="11" name="" ref="VIn11"/>
+						<GI desc="" id="12" name="" ref="VIn12"/>
+						<GI desc="" id="13" name="" ref="VIn13"/>
+						<GI desc="" id="14" name="" ref="VIn14"/>
+						<GI desc="" id="15" name="" ref="VIn15"/>
+						<GI desc="" id="16" name="" ref="VIn16"/>
+						<GI desc="" id="17" name="" ref="VIn17"/>
+						<GI desc="" id="18" name="" ref="VIn18"/>
+						<GI desc="" id="19" name="" ref="VIn19"/>
+						<GI desc="" id="20" name="" ref="VIn20"/>
+						<GI desc="" id="21" name="" ref="VIn21"/>
+						<GI desc="" id="22" name="" ref="VIn22"/>
+						<GI desc="" id="23" name="" ref="VIn23"/>
+						<GI desc="" id="24" name="" ref="VIn24"/>
+						<GI desc="" id="25" name="" ref="VIn25"/>
+						<GI desc="" id="26" name="" ref="VIn26"/>
+						<GI desc="" id="27" name="" ref="VIn27"/>
+						<GI desc="" id="28" name="" ref="VIn28"/>
+						<GI desc="" id="29" name="" ref="VIn29"/>
+						<GI desc="" id="30" name="" ref="VIn30"/>
+						<GI desc="" id="31" name="" ref="VIn31"/>
+						<GI desc="" id="32" name="" ref="VIn32"/>
+						<GI desc="" id="33" name="" ref="VIn33"/>
+						<GI desc="" id="34" name="" ref="VIn34"/>
+						<GI desc="" id="35" name="" ref="VIn35"/>
+						<GI desc="" id="36" name="" ref="VIn36"/>
+						<GI desc="" id="37" name="" ref="VIn37"/>
+						<GI desc="" id="38" name="" ref="VIn38"/>
+						<GI desc="" id="39" name="" ref="VIn39"/>
+						<GI desc="" id="40" name="" ref="VIn40"/>
+						<GI desc="" id="41" name="" ref="VIn41"/>
+						<GI desc="" id="42" name="" ref="VIn42"/>
+						<GI desc="" id="43" name="" ref="VIn43"/>
+						<GI desc="" id="44" name="" ref="VIn44"/>
+						<GI desc="" id="45" name="" ref="VIn45"/>
+						<GI desc="" id="46" name="" ref="VIn46"/>
+						<GI desc="" id="47" name="" ref="VIn47"/>
+						<GI desc="" id="48" name="" ref="VIn48"/>
+						<GI desc="" id="49" name="" ref="VIn49"/>
+						<GI desc="" id="50" name="" ref="VIn50"/>
+						<GI desc="" id="51" name="" ref="VIn51"/>
+						<GI desc="" id="52" name="" ref="VIn52"/>
+						<GI desc="" id="53" name="" ref="VIn53"/>
+						<GI desc="" id="54" name="" ref="VIn54"/>
+						<GI desc="" id="55" name="" ref="VIn55"/>
+						<GI desc="" id="56" name="" ref="VIn56"/>
+						<GI desc="" id="57" name="" ref="VIn57"/>
+						<GI desc="" id="58" name="" ref="VIn58"/>
+						<GI desc="" id="59" name="" ref="VIn59"/>
+						<GI desc="" id="60" name="" ref="VIn60"/>
+						<GI desc="" id="61" name="" ref="VIn61"/>
+						<GI desc="" id="62" name="" ref="VIn62"/>
+						<GI desc="" id="63" name="" ref="VIn63"/>
+						<GI desc="" id="64" name="" ref="VIn64"/>
+						<GI desc="" id="65" name="" ref="VIn65"/>
+						<GI desc="" id="66" name="" ref="VIn66"/>
+						<GI desc="" id="67" name="" ref="VIn67"/>
+						<GI desc="" id="68" name="" ref="VIn68"/>
+						<GI desc="" id="69" name="" ref="VIn69"/>
+						<GI desc="" id="70" name="" ref="VIn70"/>
+						<GI desc="" id="71" name="" ref="VIn71"/>
+						<GI desc="" id="72" name="" ref="VIn72"/>
+						<GI desc="" id="73" name="" ref="VIn73"/>
+						<GI desc="" id="74" name="" ref="VIn74"/>
+						<GI desc="" id="75" name="" ref="VIn75"/>
+						<GI desc="" id="76" name="" ref="VIn76"/>
+						<GI desc="" id="77" name="" ref="VIn77"/>
+						<GI desc="" id="78" name="" ref="VIn78"/>
+						<GI desc="" id="79" name="" ref="VIn79"/>
+						<GI desc="" id="80" name="" ref="VIn80"/>
+						<GI desc="" id="81" name="" ref="VIn81"/>
+						<GI desc="" id="82" name="" ref="VIn82"/>
+						<GI desc="" id="83" name="" ref="VIn83"/>
+						<GI desc="" id="84" name="" ref="VIn84"/>
+						<GI desc="" id="85" name="" ref="VIn85"/>
+						<GI desc="" id="86" name="" ref="VIn86"/>
+						<GI desc="" id="87" name="" ref="VIn87"/>
+						<GI desc="" id="88" name="" ref="VIn88"/>
+						<GI desc="" id="89" name="" ref="VIn89"/>
+						<GI desc="" id="90" name="" ref="VIn90"/>
+						<GI desc="" id="91" name="" ref="VIn91"/>
+						<GI desc="" id="92" name="" ref="VIn92"/>
+						<GI desc="" id="93" name="" ref="VIn93"/>
+						<GI desc="" id="94" name="" ref="VIn94"/>
+						<GI desc="" id="95" name="" ref="VIn95"/>
+						<GI desc="" id="96" name="" ref="VIn96"/>
+						<GI desc="" id="97" name="" ref="VIn97"/>
+						<GI desc="" id="98" name="" ref="VIn98"/>
+						<GI desc="" id="99" name="" ref="VIn99"/>
+						<GI desc="" id="100" name="" ref="VIn100"/>
+						<GI desc="" id="101" name="" ref="VIn101"/>
+						<GI desc="" id="102" name="" ref="VIn102"/>
+						<GI desc="" id="103" name="" ref="VIn103"/>
+						<GI desc="" id="104" name="" ref="VIn104"/>
+						<GI desc="" id="105" name="" ref="VIn105"/>
+						<GI desc="" id="106" name="" ref="VIn106"/>
+						<GI desc="" id="107" name="" ref="VIn107"/>
+						<GI desc="" id="108" name="" ref="VIn108"/>
+						<GI desc="" id="109" name="" ref="VIn109"/>
+						<GI desc="" id="110" name="" ref="VIn110"/>
+						<GI desc="" id="111" name="" ref="VIn111"/>
+						<GI desc="" id="112" name="" ref="VIn112"/>
+						<GI desc="" id="113" name="" ref="VIn113"/>
+						<GI desc="" id="114" name="" ref="VIn114"/>
+						<GI desc="" id="115" name="" ref="VIn115"/>
+						<GI desc="" id="116" name="" ref="VIn116"/>
+						<GI desc="" id="117" name="" ref="VIn117"/>
+						<GI desc="" id="118" name="" ref="VIn118"/>
+						<GI desc="" id="119" name="" ref="VIn119"/>
+						<GI desc="" id="120" name="" ref="VIn120"/>
+						<GI desc="" id="121" name="" ref="VIn121"/>
+						<GI desc="" id="122" name="" ref="VIn122"/>
+						<GI desc="" id="123" name="" ref="VIn123"/>
+						<GI desc="" id="124" name="" ref="VIn124"/>
+						<GI desc="" id="125" name="" ref="VIn125"/>
+						<GI desc="" id="126" name="" ref="VIn126"/>
+						<GI desc="" id="127" name="" ref="VIn127"/>
+						<GI desc="" id="128" name="" ref="VIn128"/> 
+					</Gxx>
+				</GooseReceive>
+			</Private>
+        <Authentication none="true"/>
+        <LDevice inst="LD0">
+          <LN0 desc="General" inst="" lnType="LLN0_MT_A" lnClass="LLN0">
+            <DataSet name="stDS" desc="Device info">
+              <FCDA ldInst="LD0" lnClass="LPHD" fc="DC" lnInst="1" prefix="" doName="PhyNam"/>
+              <FCDA ldInst="LD0" lnClass="LPHD" fc="ST" lnInst="1" prefix="" doName="PhyHealth"/>
+              <FCDA ldInst="LD0" lnClass="LLN0" fc="ST" prefix="" doName="Health"/>
+              <FCDA ldInst="LD0" lnClass="LLN0" fc="ST" prefix="" doName="LocKey"/>
+              <FCDA ldInst="LD0" lnClass="CALH" fc="ST" lnInst="1" prefix="" doName="GrAlm"/>
+              <FCDA ldInst="LD0" lnClass="CALH" fc="ST" lnInst="1" prefix="" doName="GrWrn"/>
+              <FCDA ldInst="LD0" lnClass="XCBR" fc="ST" lnInst="1" prefix="Q1_" doName="Pos"/>
+              <FCDA ldInst="LD0" lnClass="SCBR" fc="ST" lnInst="1" prefix="Q1_" doName="MechHealth"/>
+              <FCDA ldInst="LD0" lnClass="SIMG" fc="ST" lnInst="1" prefix="Q1_" doName="InsAlm"/>
+              <FCDA ldInst="LD0" lnClass="RREC" fc="ST" lnInst="1" prefix="Q1_" doName="AutoRecSt"/>
+              <FCDA ldInst="LD0" lnClass="SARC" fc="ST" lnInst="1" prefix="" doName="Health"/>
+              <FCDA ldInst="LD0" lnClass="SARC" fc="ST" lnInst="1" prefix="" doName="FADet"/>
+              <FCDA ldInst="LD0" lnClass="RFLO" fc="MX" lnInst="1" prefix="" doName="FltDiskm"/>
+            </DataSet>
+            <DataSet name="ptDS" desc="Protections info">
+              <FCDA ldInst="LD0" lnClass="PTRC" fc="ST" lnInst="1" prefix="" doName="Tr"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind1"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind2"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind3"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind4"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind5"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind6"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind7"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind8"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind9"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind10"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind11"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind12"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind13"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind14"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind15"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind16"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind17"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind18"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind19"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind20"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind21"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind22"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind23"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind24"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind25"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind26"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind27"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind28"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind29"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind30"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind31"/>
+              <FCDA ldInst="LD0" lnClass="GAPC" fc="ST" lnInst="1" prefix="User_" doName="Ind32"/>
+            </DataSet>
+            <DataSet name="ioDS" desc="Discrete inputs and outputs status">
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind1"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind2"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind3"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind4"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind5"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind6"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind7"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind8"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind9"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind10"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind11"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind12"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind13"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind14"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind15"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind16"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind17"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind18"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind19"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind20"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind21"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="In_" doName="Ind22"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind1"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind2"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind3"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind4"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind5"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind6"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind7"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind8"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind9"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind10"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind11"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind12"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind13"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind14"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind15"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind16"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind17"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind18"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind19"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind20"/>
+              <FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="Out_" doName="Ind21"/>
+            </DataSet>
+            <DataSet name="mxDS" desc="Measurement values">
+              <FCDA ldInst="LD0" lnClass="MMXU" fc="MX" lnInst="1" prefix="MT_" doName="Hz"/>
+              <FCDA ldInst="LD0" lnClass="MMXU" fc="MX" lnInst="1" prefix="MT_" doName="A"/>
+              <FCDA ldInst="LD0" lnClass="MMXU" fc="MX" lnInst="1" prefix="MT_" doName="PPV"/>
+              <FCDA ldInst="LD0" lnClass="MMXU" fc="MX" lnInst="1" prefix="MT_" doName="PNV"/>
+              <FCDA ldInst="LD0" lnClass="MMXU" fc="MX" lnInst="1" prefix="MT_" doName="PPV2"/>
+              <FCDA ldInst="LD0" lnClass="MMXU" fc="MX" lnInst="1" prefix="Pwr_" doName="TotW"/>
+              <FCDA ldInst="LD0" lnClass="MMXU" fc="MX" lnInst="1" prefix="Pwr_" doName="TotVAr"/>
+              <FCDA ldInst="LD0" lnClass="MMXU" fc="MX" lnInst="1" prefix="Pwr_" doName="TotVA"/>
+              <FCDA ldInst="LD0" lnClass="MMXU" fc="MX" lnInst="1" prefix="Pwr_" doName="TotPF"/>
+            </DataSet>
+            <DataSet name="gseDS" desc="GOOSE - GSE_GGIO1 only">
+				<FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="GSE_" doName="VOut01"/>
+				<FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="GSE_" doName="VOut02"/>
+				<FCDA ldInst="LD0" lnClass="GGIO" fc="ST" lnInst="1" prefix="GSE_" doName="VOut03"/>
+			</DataSet>
+            <!-- ReportControl -->
+            <ReportControl name="brcbST" desc="Device status report" datSet="stDS" rptID="brcbST" confRev="1" buffered="true" bufTime="100" indexed="false" intgPd="10000">
+              <TrgOps dchg="true" period="true" qchg="true"/>
+              <OptFields bufOvfl="true" configRef="true" dataSet="true" entryID="true" reasonCode="true" seqNum="true" timeStamp="true"/>
+            </ReportControl>
+            <ReportControl name="brcbPT" desc="Protection status report" datSet="ptDS" rptID="brcbPT" confRev="1" buffered="true" bufTime="100" indexed="false" intgPd="10000">
+              <TrgOps dchg="true" period="true" qchg="true"/>
+              <OptFields bufOvfl="true" configRef="true" dataSet="true" entryID="true" reasonCode="true" seqNum="true" timeStamp="true"/>
+            </ReportControl>
+            <ReportControl name="brcbIO" desc="Discrete IO status report" datSet="ioDS" rptID="brcbIO" confRev="1" buffered="true" bufTime="100" indexed="false" intgPd="7000">
+              <TrgOps dchg="true" period="true" qchg="true"/>
+              <OptFields bufOvfl="true" configRef="true" dataSet="true" entryID="true" reasonCode="true" seqNum="true" timeStamp="true"/>
+            </ReportControl>
+            <ReportControl name="ubrcbMX" desc="Measurement values report" datSet="mxDS" rptID="ubrcbMX" confRev="1" indexed="false" intgPd="13000">
+              <TrgOps dchg="true" period="true" qchg="true"/>
+              <OptFields bufOvfl="false" configRef="true" dataSet="true" entryID="true" reasonCode="true" seqNum="true" timeStamp="true"/>
+            </ReportControl>
+            <DOI name="NamPlt"> <DAI name="swRev" desc="Communication SW version"><Val>1</Val></DAI></DOI>
+            <!--  GooseControl -->
+            <GSEControl name="gcbBasicGse" type="GOOSE" appID="TEMPLATE_APPLICATION_GSE" confRev="1" datSet="gseDS" desc="Predefined GOOSE ControlBlock"/>
+            <SettingControl numOfSGs="2"/>
+          </LN0>
+
+          <LN desc="Device" inst="1" lnType="LPHD_MT_1" lnClass="LPHD" prefix="">
+		  <DOI name="Proxy"><DAI name="stVal"><Val>0</Val></DAI></DOI>
+            <DOI name="PhyNam">
+              <DAI name="hwRev"> <Val>BMRZ-152</Val></DAI>
+              <DAI name="name"> <Val>BMRZ-152-KSZ-41</Val></DAI>
+              <DAI name="swRev"><Val>41</Val></DAI>
+              <DAI name="location" desc="Value can be freely changed"/>
+            </DOI>
+          </LN>
+
+          <LN desc="Inputs" inst="1" lnType="GGIO_MT_22" lnClass="GGIO" prefix="In_"/>
+		  
+          <LN desc="Outputs" inst="1" lnType="GGIO_MT_21" lnClass="GGIO" prefix="Out_"/>
+		  
+		  <LN desc="User logic" inst="1" lnType="GAPC_152KSZ41" lnClass="GAPC" prefix="User_">
+            <DOI name="Ind1"><Private type="PntRef_MT">BOOLEAN;0</Private></DOI>
+            <DOI name="Ind2"><Private type="PntRef_MT">BOOLEAN;1</Private></DOI>
+            <DOI name="Ind3"><Private type="PntRef_MT">BOOLEAN;2</Private></DOI>
+            <DOI name="Ind4"><Private type="PntRef_MT">BOOLEAN;3</Private></DOI>
+            <DOI name="Ind5"><Private type="PntRef_MT">BOOLEAN;4</Private></DOI>
+            <DOI name="Ind6"><Private type="PntRef_MT">BOOLEAN;5</Private></DOI>
+            <DOI name="Ind7"><Private type="PntRef_MT">BOOLEAN;6</Private></DOI>
+            <DOI name="Ind8"><Private type="PntRef_MT">BOOLEAN;7</Private></DOI>
+            <DOI name="Ind9"><Private type="PntRef_MT">BOOLEAN;8</Private></DOI>
+            <DOI name="Ind10"><Private type="PntRef_MT">BOOLEAN;9</Private></DOI>
+            <DOI name="Ind11"><Private type="PntRef_MT">BOOLEAN;10</Private></DOI>
+            <DOI name="Ind12"><Private type="PntRef_MT">BOOLEAN;11</Private></DOI>
+            <DOI name="Ind13"><Private type="PntRef_MT">BOOLEAN;12</Private></DOI>
+            <DOI name="Ind14"><Private type="PntRef_MT">BOOLEAN;13</Private></DOI>
+            <DOI name="Ind15"><Private type="PntRef_MT">BOOLEAN;14</Private></DOI>
+            <DOI name="Ind16"><Private type="PntRef_MT">BOOLEAN;15</Private></DOI>
+            <DOI name="Ind17"><Private type="PntRef_MT">BOOLEAN;16</Private></DOI>
+            <DOI name="Ind18"><Private type="PntRef_MT">BOOLEAN;17</Private></DOI>
+            <DOI name="Ind19"><Private type="PntRef_MT">BOOLEAN;18</Private></DOI>
+            <DOI name="Ind20"><Private type="PntRef_MT">BOOLEAN;19</Private></DOI>
+            <DOI name="Ind21"><Private type="PntRef_MT">BOOLEAN;20</Private></DOI>
+            <DOI name="Ind22"><Private type="PntRef_MT">BOOLEAN;21</Private></DOI>
+            <DOI name="Ind23"><Private type="PntRef_MT">BOOLEAN;22</Private></DOI>
+            <DOI name="Ind24"><Private type="PntRef_MT">BOOLEAN;23</Private></DOI>
+            <DOI name="Ind25"><Private type="PntRef_MT">BOOLEAN;24</Private></DOI>
+            <DOI name="Ind26"><Private type="PntRef_MT">BOOLEAN;25</Private></DOI>
+            <DOI name="Ind27"><Private type="PntRef_MT">BOOLEAN;26</Private></DOI>
+            <DOI name="Ind28"><Private type="PntRef_MT">BOOLEAN;27</Private></DOI>
+            <DOI name="Ind29"><Private type="PntRef_MT">BOOLEAN;28</Private></DOI>
+            <DOI name="Ind30"><Private type="PntRef_MT">BOOLEAN;29</Private></DOI>
+            <DOI name="Ind31"><Private type="PntRef_MT">BOOLEAN;30</Private></DOI>
+            <DOI name="Ind32"><Private type="PntRef_MT">BOOLEAN;31</Private></DOI>
+			<DOI name="SPCSO1"><DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI></DOI>
+			<DOI name="SPCSO2"><DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI></DOI>
+			<DOI name="SPCSO3"><DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI></DOI>
+			<DOI name="SPCSO4"><DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI></DOI>
+			<DOI name="SPCSO5"><DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI></DOI>
+			<DOI name="SPCSO6"><DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI></DOI>
+			<DOI name="SPCSO7"><DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI></DOI>
+			<DOI name="SPCSO8"><DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI></DOI>
+          </LN>
+
+		 <LN desc="Goose Virtual IO" inst="1" lnType="GGIO_MTa_GSE4" lnClass="GGIO" prefix="GSE_">
+			<DOI name="VIn01"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C170</Private></DOI>
+			<DOI name="VIn02"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C171</Private></DOI>
+			<DOI name="VIn03"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C172</Private></DOI>
+			<DOI name="VIn04"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C173</Private></DOI>
+			<DOI name="VIn05"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C174</Private></DOI>
+			<DOI name="VIn06"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C175</Private></DOI>
+			<DOI name="VIn07"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C176</Private></DOI>
+			<DOI name="VIn08"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C177</Private></DOI>
+			<DOI name="VIn09"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C178</Private></DOI>
+			<DOI name="VIn10"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C179</Private></DOI>
+			<DOI name="VIn11"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C17A</Private></DOI>
+			<DOI name="VIn12"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C17B</Private></DOI>
+			<DOI name="VIn13"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C17C</Private></DOI>
+			<DOI name="VIn14"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C17D</Private></DOI>
+			<DOI name="VIn15"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C17E</Private></DOI>
+			<DOI name="VIn16"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C17F</Private></DOI>
+			<DOI name="VIn17"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C180</Private></DOI>
+			<DOI name="VIn18"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C181</Private></DOI>
+			<DOI name="VIn19"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C182</Private></DOI>
+			<DOI name="VIn20"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C183</Private></DOI>
+			<DOI name="VIn21"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C184</Private></DOI>
+			<DOI name="VIn22"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C185</Private></DOI>
+			<DOI name="VIn23"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C186</Private></DOI>
+			<DOI name="VIn24"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C187</Private></DOI>
+			<DOI name="VIn25"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C188</Private></DOI>
+			<DOI name="VIn26"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C189</Private></DOI>
+			<DOI name="VIn27"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C18A</Private></DOI>
+			<DOI name="VIn28"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C18B</Private></DOI>
+			<DOI name="VIn29"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C18C</Private></DOI>
+			<DOI name="VIn30"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C18D</Private></DOI>
+			<DOI name="VIn31"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C18E</Private></DOI>
+			<DOI name="VIn32"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C18F</Private></DOI>
+			<DOI name="VIn33"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C190</Private></DOI>
+			<DOI name="VIn34"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C191</Private></DOI>
+			<DOI name="VIn35"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C192</Private></DOI>
+			<DOI name="VIn36"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C193</Private></DOI>
+			<DOI name="VIn37"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C194</Private></DOI>
+			<DOI name="VIn38"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C195</Private></DOI>
+			<DOI name="VIn39"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C196</Private></DOI>
+			<DOI name="VIn40"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C197</Private></DOI>
+			<DOI name="VIn41"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C198</Private></DOI>
+			<DOI name="VIn42"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C199</Private></DOI>
+			<DOI name="VIn43"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C19A</Private></DOI>
+			<DOI name="VIn44"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C19B</Private></DOI>
+			<DOI name="VIn45"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C19C</Private></DOI>
+			<DOI name="VIn46"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C19D</Private></DOI>
+			<DOI name="VIn47"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C19E</Private></DOI>
+			<DOI name="VIn48"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C19F</Private></DOI>
+			<DOI name="VIn49"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1A0</Private></DOI>
+			<DOI name="VIn50"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1A1</Private></DOI>
+			<DOI name="VIn51"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1A2</Private></DOI>
+			<DOI name="VIn52"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1A3</Private></DOI>
+			<DOI name="VIn53"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1A4</Private></DOI>
+			<DOI name="VIn54"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1A5</Private></DOI>
+			<DOI name="VIn55"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1A6</Private></DOI>
+			<DOI name="VIn56"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1A7</Private></DOI>
+			<DOI name="VIn57"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1A8</Private></DOI>
+			<DOI name="VIn58"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1A9</Private></DOI>
+			<DOI name="VIn59"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1AA</Private></DOI>
+			<DOI name="VIn60"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1AB</Private></DOI>
+			<DOI name="VIn61"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1AC</Private></DOI>
+			<DOI name="VIn62"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1AD</Private></DOI>
+			<DOI name="VIn63"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1AE</Private></DOI>
+			<DOI name="VIn64"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1AF</Private></DOI>
+			<DOI name="VIn65"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1B0</Private></DOI>
+			<DOI name="VIn66"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1B1</Private></DOI>
+			<DOI name="VIn67"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1B2</Private></DOI>
+			<DOI name="VIn68"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1B3</Private></DOI>
+			<DOI name="VIn69"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1B4</Private></DOI>
+			<DOI name="VIn70"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1B5</Private></DOI>
+			<DOI name="VIn71"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1B6</Private></DOI>
+			<DOI name="VIn72"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1B7</Private></DOI>
+			<DOI name="VIn73"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1B8</Private></DOI>
+			<DOI name="VIn74"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1B9</Private></DOI>
+			<DOI name="VIn75"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1BA</Private></DOI>
+			<DOI name="VIn76"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1BB</Private></DOI>
+			<DOI name="VIn77"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1BC</Private></DOI>
+			<DOI name="VIn78"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1BD</Private></DOI>
+			<DOI name="VIn79"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1BE</Private></DOI>
+			<DOI name="VIn80"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1BF</Private></DOI>
+			<DOI name="VIn81"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1C0</Private></DOI>
+			<DOI name="VIn82"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1C1</Private></DOI>
+			<DOI name="VIn83"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1C2</Private></DOI>
+			<DOI name="VIn84"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1C3</Private></DOI>
+			<DOI name="VIn85"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1C4</Private></DOI>
+			<DOI name="VIn86"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1C5</Private></DOI>
+			<DOI name="VIn87"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1C6</Private></DOI>
+			<DOI name="VIn88"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1C7</Private></DOI>
+			<DOI name="VIn89"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1C8</Private></DOI>
+			<DOI name="VIn90"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1C9</Private></DOI>
+			<DOI name="VIn91"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1CA</Private></DOI>
+			<DOI name="VIn92"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1CB</Private></DOI>
+			<DOI name="VIn93"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1CC</Private></DOI>
+			<DOI name="VIn94"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1CD</Private></DOI>
+			<DOI name="VIn95"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1CE</Private></DOI>
+			<DOI name="VIn96"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1CF</Private></DOI>
+			<DOI name="VIn97"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1D0</Private></DOI>
+			<DOI name="VIn98"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1D1</Private></DOI>
+			<DOI name="VIn99"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1D2</Private></DOI>
+			<DOI name="VIn100"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1D3</Private></DOI>
+			<DOI name="VIn101"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1D4</Private></DOI>
+			<DOI name="VIn102"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1D5</Private></DOI>
+			<DOI name="VIn103"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1D6</Private></DOI>
+			<DOI name="VIn104"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1D7</Private></DOI>
+			<DOI name="VIn105"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1D8</Private></DOI>
+			<DOI name="VIn106"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1D9</Private></DOI>
+			<DOI name="VIn107"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1DA</Private></DOI>
+			<DOI name="VIn108"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1DB</Private></DOI>
+			<DOI name="VIn109"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1DC</Private></DOI>
+			<DOI name="VIn110"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1DD</Private></DOI>
+			<DOI name="VIn111"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1DE</Private></DOI>
+			<DOI name="VIn112"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1DF</Private></DOI>
+			<DOI name="VIn113"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1E0</Private></DOI>
+			<DOI name="VIn114"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1E1</Private></DOI>
+			<DOI name="VIn115"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1E2</Private></DOI>
+			<DOI name="VIn116"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1E3</Private></DOI>
+			<DOI name="VIn117"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1E4</Private></DOI>
+			<DOI name="VIn118"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1E5</Private></DOI>
+			<DOI name="VIn119"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1E6</Private></DOI>
+			<DOI name="VIn120"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1E7</Private></DOI>
+			<DOI name="VIn121"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1E8</Private></DOI>
+			<DOI name="VIn122"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1E9</Private></DOI>
+			<DOI name="VIn123"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1EA</Private></DOI>
+			<DOI name="VIn124"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1EB</Private></DOI>
+			<DOI name="VIn125"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1EC</Private></DOI>
+			<DOI name="VIn126"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1ED</Private></DOI>
+			<DOI name="VIn127"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1EE</Private></DOI>
+			<DOI name="VIn128"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C1F0</Private></DOI>
+			<DOI name="VOut01"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C200</Private></DOI>
+			<DOI name="VOut02"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C201</Private></DOI>
+			<DOI name="VOut03"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C202</Private></DOI>
+			<DOI name="VOut04"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C203</Private></DOI>
+			<DOI name="VOut05"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C204</Private></DOI>
+			<DOI name="VOut06"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C205</Private></DOI>
+			<DOI name="VOut07"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C206</Private></DOI>
+			<DOI name="VOut08"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C207</Private></DOI>
+			<DOI name="VOut09"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C208</Private></DOI>
+			<DOI name="VOut10"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C209</Private></DOI>
+			<DOI name="VOut11"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C20A</Private></DOI>
+			<DOI name="VOut12"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C20B</Private></DOI>
+			<DOI name="VOut13"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C20C</Private></DOI>
+			<DOI name="VOut14"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C20D</Private></DOI>
+			<DOI name="VOut15"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C20E</Private></DOI>
+			<DOI name="VOut16"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C20F</Private></DOI>
+			<DOI name="VOut17"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C210</Private></DOI>
+			<DOI name="VOut18"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C211</Private></DOI>
+			<DOI name="VOut19"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C212</Private></DOI>
+			<DOI name="VOut20"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C213</Private></DOI>
+			<DOI name="VOut21"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C214</Private></DOI>
+			<DOI name="VOut22"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C215</Private></DOI>
+			<DOI name="VOut23"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C216</Private></DOI>
+			<DOI name="VOut24"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C217</Private></DOI>
+			<DOI name="VOut25"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C218</Private></DOI>
+			<DOI name="VOut26"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C219</Private></DOI>
+			<DOI name="VOut27"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C21A</Private></DOI>
+			<DOI name="VOut28"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C21B</Private></DOI>
+			<DOI name="VOut29"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C21C</Private></DOI>
+			<DOI name="VOut30"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C21D</Private></DOI>
+			<DOI name="VOut31"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C21E</Private></DOI>
+			<DOI name="VOut32"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C21F</Private></DOI>
+			<DOI name="VOut33"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C220</Private></DOI>
+			<DOI name="VOut34"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C221</Private></DOI>
+			<DOI name="VOut35"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C222</Private></DOI>
+			<DOI name="VOut36"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C223</Private></DOI>
+			<DOI name="VOut37"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C224</Private></DOI>
+			<DOI name="VOut38"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C225</Private></DOI>
+			<DOI name="VOut39"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C226</Private></DOI>
+			<DOI name="VOut40"><Private type="SchneiderElectric-IED-PntRef">T:SS;S:C227</Private></DOI>
+		</LN>
+		  
+          <LN desc="Osc" inst="1" lnType="RDRE_MT_1" lnClass="RDRE" prefix="">
+            <DOI name="FltNum"><DAI name="stVal"><Val>1</Val></DAI></DOI>
+			<DOI name="RcdTrg">
+				<DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI>
+			</DOI>			
+		  </LN>
+
+          <LN desc="Alarm" inst="1" lnType="CALH_MT_0" lnClass="CALH" prefix="">
+			<DOI name="AlmReset">
+				<DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI>
+			</DOI>
+		  </LN>
+		  
+          <LN desc="TT" inst="1" lnType="TCTR_MT_2" lnClass="TCTR" prefix="A_"/>
+          <LN desc="TT" inst="1" lnType="TCTR_MT_2" lnClass="TCTR" prefix="B_"/>
+          <LN desc="TT" inst="1" lnType="TCTR_MT_2" lnClass="TCTR" prefix="C_"/>
+          <LN desc="TT" inst="1" lnType="TCTR_MT_1" lnClass="TCTR" prefix="G_"/>
+          <LN desc="TN" inst="1" lnType="TVTR_MT_2" lnClass="TVTR" prefix="AB_"/>
+          <LN desc="TN" inst="1" lnType="TVTR_MT_2" lnClass="TVTR" prefix="BC_"/>
+          <LN desc="TN" inst="1" lnType="TVTR_MT_1" lnClass="TVTR" prefix="G_"/>
+          <LN desc="TN" inst="2" lnType="TVTR_MT_2" lnClass="TVTR" prefix="TN2_"/>
+
+          <LN desc="Measurements" inst="1" lnType="MMXU_MT_152KSZ41" lnClass="MMXU" prefix="MT_">
+            <DOI name="Hz"><DAI name="db"><Val>200</Val></DAI></DOI>
+            <DOI name="A">
+              <SDI name="phsA">
+                <DAI name="db"><Val>3000</Val></DAI>
+                <DAI name="zeroDb"><Val>50</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="phsB">
+                <DAI name="db"><Val>3000</Val></DAI>
+                <DAI name="zeroDb"><Val>50</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="phsC">
+                <DAI name="db"><Val>3000</Val></DAI>
+                <DAI name="zeroDb"><Val>50</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="res">
+                <DAI name="db"><Val>3000</Val></DAI>
+                <DAI name="zeroDb"><Val>4</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+		    </DOI>
+            <DOI name="PPV">
+              <SDI name="phsAB">
+                <DAI name="db"><Val>3000</Val></DAI>
+                <DAI name="zeroDb"><Val>2000</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="phsBC">
+                <DAI name="db"><Val>3000</Val></DAI>
+                <DAI name="zeroDb"><Val>2000</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="phsCA">
+                <DAI name="db"><Val>3000</Val></DAI>
+                <DAI name="zeroDb"><Val>2000</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+		    </DOI>
+            <DOI name="PNV">
+              <SDI name="res">
+                <DAI name="db"><Val>3000</Val></DAI>
+                <DAI name="zeroDb"><Val>2000</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+		    </DOI>
+            <DOI name="PPV2">
+              <SDI name="phsBC">
+                <DAI name="db"><Val>3000</Val></DAI>
+                <DAI name="zeroDb"><Val>2000</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+		    </DOI>
+		  </LN>
+		  
+		  
+	
+          <LN desc="Phase-to-phase" inst="1" lnType="MMXU_MT_Z" lnClass="MMXU" prefix="Z_">
+            <DOI name="Z">
+              <SDI name="phsA">
+                <DAI name="db"><Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>100</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="phsB">
+                <DAI name="db"><Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>100</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="phsC">
+                <DAI name="db"><Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>100</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+			</DOI>
+		  </LN>
+
+          <LN desc="Phase-to-ground" inst="2" lnType="MMXU_MT_Z" lnClass="MMXU" prefix="Z_">
+            <DOI name="Z">
+              <SDI name="phsA">
+                <DAI name="db"><Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>100</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="phsB">
+                <DAI name="db"><Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>100</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="phsC">
+                <DAI name="db"><Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>100</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+			</DOI>
+		  </LN>
+		
+		  
+		<LN prefix="Prec_" lnClass="MMXU" inst="1" lnType="MMXU_MTa_3" desc="precision current channel">
+			<DOI name="A">
+				<SDI name="phsA">
+					<DAI name="db"><Val>3000</Val></DAI>
+					<DAI name="zeroDb"><Val>4</Val></DAI>
+					<DAI name="dbAng"><Val>0</Val></DAI>
+				</SDI>
+			</DOI>
+		</LN>  
+
+        <LN desc="Power" inst="1" lnType="MMXU_MT_PWR" lnClass="MMXU" prefix="Pwr_">
+			<DOI name="TotW"><DAI name="db"> <Val>5000</Val></DAI><DAI name="zeroDb"> <Val>100</Val></DAI></DOI>
+			<DOI name="TotVAr"><DAI name="db"> <Val>5000</Val></DAI><DAI name="zeroDb"> <Val>100</Val></DAI></DOI>
+			<DOI name="TotVA"><DAI name="db"> <Val>5000</Val></DAI><DAI name="zeroDb"> <Val>100</Val></DAI></DOI>
+			<DOI name="TotPF"><DAI name="db"> <Val>1000</Val></DAI></DOI> 
+		</LN>
+
+        <LN desc="Seq" inst="1" lnType="MSQI_MT_1" lnClass="MSQI" prefix="Seq_">
+            <DOI name="SeqA">
+              <SDI name="c1">
+                <DAI name="db"> <Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>50</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="c2">
+                <DAI name="db"> <Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>50</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="c3">
+                <DAI name="db"> <Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>50</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+		  </DOI>
+            <DOI name="SeqV">
+              <SDI name="c1">
+                <DAI name="db"> <Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>1000</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="c2">
+                <DAI name="db"> <Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>1000</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+              <SDI name="c3">
+                <DAI name="db"> <Val>5000</Val></DAI>
+                <DAI name="zeroDb"><Val>1000</Val></DAI>
+                <DAI name="dbAng"><Val>0</Val></DAI>
+              </SDI>
+		  </DOI>
+		</LN>
+
+          <LN desc="Breaker" inst="1" lnType="XCBR_MT_1" lnClass="XCBR" prefix="Q1_"/>
+          <LN desc="Diagnostic" inst="1" lnType="SCBR_MT_1" lnClass="SCBR" prefix="Q1_"/>
+          <LN desc="Control" inst="1" lnType="CSWI_MT_A" lnClass="CSWI" prefix="Q1_">
+			<DOI name="Pos">
+				<DAI name="ctlModel"><Val>sbo-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI>
+				<DAI name="operTimeout"><Val>5000</Val></DAI>
+			</DOI>
+		  </LN>
+          <LN desc="SF6 Q" inst="1" lnType="SIMG_MT_SF6" lnClass="SIMG" prefix="Q1_"/>
+          <LN desc="UROV" inst="1" lnType="RBRF_MT_0" lnClass="RBRF" prefix="Q1_"/>
+          <LN desc="APV" inst="1" lnType="RREC_MT_150c" lnClass="RREC" prefix="Q1_"/>
+          <LN desc="Sync" inst="1" lnType="RSYN_MT_0" lnClass="RSYN" prefix="Q1_"/>
+		  
+
+          <LN desc="OMP" inst="1" lnType="RFLO_MT_3" lnClass="RFLO" prefix="">
+				<DOI name="FltZ">
+					<DAI name="db"><Val>0</Val></DAI><DAI name="zeroDb"><Val>0</Val></DAI><DAI name="dbAng"><Val>0</Val></DAI>
+				</DOI>
+				<DOI name="FltDiskm"><DAI name="db"><Val>0</Val></DAI></DOI>
+			</LN>
+          <LN desc="DGZ" inst="1" lnType="SARC_MT_0" lnClass="SARC" prefix=""/>
+          <LN desc="UBK" inst="1" lnType="RPSB_MT_0" lnClass="RPSB" prefix=""/>
+
+          <LN desc="Protections" inst="1" lnType="PTRC_MT_0" lnClass="PTRC" prefix=""/>
+          
+		  <LN desc="ACHR 1 queue" inst="1" lnType="PTUF_MT_KSZ" lnClass="PTUF" prefix="">
+			<DOI name="Reset">
+				<DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI>
+			</DOI>			
+		  </LN>
+          <LN desc="ACHR 2 queue" inst="2" lnType="PTUF_MT_KSZ" lnClass="PTUF" prefix="">
+			<DOI name="Reset">
+				<DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI>
+			</DOI>			
+		  </LN>
+          <LN desc="ACHR 3 queue" inst="3" lnType="PTUF_MT_KSZ" lnClass="PTUF" prefix="">
+			<DOI name="Reset">
+				<DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI>
+			</DOI>			
+		  </LN>
+		  <LN desc="ARSN 1 queue" inst="1" lnType="PTUV_MT_KSZ" lnClass="PTUV" prefix="">
+			<DOI name="Reset">
+				<DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI>
+			</DOI>			
+		  </LN>
+          <LN desc="ARSN 2 queue" inst="2" lnType="PTUV_MT_KSZ" lnClass="PTUV" prefix="">
+			<DOI name="Reset">
+				<DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI>
+			</DOI>			
+		  </LN>
+          <LN desc="ARSN 3 queue" inst="3" lnType="PTUV_MT_KSZ" lnClass="PTUV" prefix="">
+			<DOI name="Reset">
+				<DAI name="ctlModel"><Val>direct-with-normal-security</Val></DAI>
+				<DAI name="sboTimeout"><Val>1000</Val></DAI>
+			</DOI>			
+		  </LN>
+          <LN desc="KCN settings" inst="1" lnType="GGIO_152KSZ41c_KCN" lnClass="GGIO" prefix="SetKCN_"/>
+          <LN desc="KCT settings" inst="1" lnType="GGIO_152KSZ41c_KCT" lnClass="GGIO" prefix="SetKCT_"/>
+          <LN desc="UBK settings" inst="1" lnType="GGIO_152KSZ41c_UBK" lnClass="GGIO" prefix="SetUBK_"/>
+          <LN desc="DZMF settings" inst="1" lnType="GGIO_152KSZ41c_DZMF" lnClass="GGIO" prefix="SetDZMF_"/>
+          <LN desc="UDZMF settings" inst="1" lnType="GGIO_152KSZ41c_UDZMF" lnClass="GGIO" prefix="SetUDZMF_"/>
+          <LN desc="DZDV settings" inst="1" lnType="GGIO_152KSZ41c_DZDV" lnClass="GGIO" prefix="SetDZDV_"/>
+          <LN desc="UDZDV settings" inst="1" lnType="GGIO_152KSZ41c_UDZDV" lnClass="GGIO" prefix="SetUDZDV_"/>
+          <LN desc="TO settings" inst="1" lnType="GGIO_152KSZ41c_TO" lnClass="GGIO" prefix="SetTO_"/>
+          <LN desc="MTZ settings" inst="1" lnType="GGIO_152KSZ41c_MTZ" lnClass="GGIO" prefix="SetMTZ_"/>
+          <LN desc="UMTZ settings" inst="1" lnType="GGIO_152KSZ41c_UMTZ" lnClass="GGIO" prefix="SetUMTZ_"/>
+          <LN desc="LZSH settings" inst="1" lnType="GGIO_152KSZ41c_LZSH" lnClass="GGIO" prefix="SetLZSH_"/>
+          <LN desc="DGZ settings" inst="1" lnType="GGIO_152KSZ41c_DGZ" lnClass="GGIO" prefix="SetDGZ_"/>
+          <LN desc="ZPP settings" inst="1" lnType="GGIO_152KSZ41c_ZPP" lnClass="GGIO" prefix="SetZPP_"/>
+          <LN desc="ZMN settings" inst="1" lnType="GGIO_152KSZ41c_ZMN" lnClass="GGIO" prefix="SetZMN_"/>		  
+          <LN desc="ZOZZ settings" inst="1" lnType="GGIO_152KSZ41c_ZOZZ" lnClass="GGIO" prefix="SetZOZZ_"/>
+          <LN desc="ZPN settings" inst="1" lnType="GGIO_152KSZ41c_ZPN" lnClass="GGIO" prefix="SetZPN_"/>		  
+          <LN desc="ZOF settings" inst="1" lnType="GGIO_152KSZ41c_ZOF" lnClass="GGIO" prefix="SetZOF_"/>
+          <LN desc="UROV settings" inst="1" lnType="GGIO_152KSZ41c_UROV" lnClass="GGIO" prefix="SetUROV_"/>
+          <LN desc="APV1 settings" inst="1" lnType="GGIO_152KSZ41c_APV" lnClass="GGIO" prefix="SetAPV_"/>
+          <LN desc="APV2 settings" inst="2" lnType="GGIO_152KSZ41c_APV" lnClass="GGIO" prefix="SetAPV_"/>
+          <LN desc="ACHR/CHAPV-A/B settings" inst="1" lnType="GGIO_152KSZ41c_ACHR_A_B" lnClass="GGIO" prefix="SetACHRAB_"/>
+          <LN desc="ACHR_ARSN1 settings" inst="1" lnType="GGIO_152KSZ41c_ACHR_ARSN" lnClass="GGIO" prefix="SetACHR_"/>
+          <LN desc="ACHR_ARSN2 settings" inst="2" lnType="GGIO_152KSZ41c_ACHR_ARSN" lnClass="GGIO" prefix="SetACHR_"/>
+          <LN desc="ACHR_ARSN3 settings" inst="3" lnType="GGIO_152KSZ41c_ACHR_ARSN" lnClass="GGIO" prefix="SetACHR_"/>
+          <LN desc="CHAPV_APVN1 settings" inst="1" lnType="GGIO_152KSZ41c_CHAPV_APVN" lnClass="GGIO" prefix="SetCHAPV_"/>
+          <LN desc="CHAPV_APVN2 settings" inst="2" lnType="GGIO_152KSZ41c_CHAPV_APVN" lnClass="GGIO" prefix="SetCHAPV_"/>
+          <LN desc="CHAPV_APVN3 settings" inst="3" lnType="GGIO_152KSZ41c_CHAPV_APVN" lnClass="GGIO" prefix="SetCHAPV_"/>		  
+          <LN desc="AVR settings" inst="1" lnType="GGIO_152KSZ41c_AVR" lnClass="GGIO" prefix="SetAVR_"/>
+          <LN desc="VNR settings" inst="1" lnType="GGIO_152KSZ41c_VNR" lnClass="GGIO" prefix="SetVNR_"/>
+          <LN desc="RAVR settings" inst="1" lnType="GGIO_152KSZ41c_RAVR" lnClass="GGIO" prefix="SetRAVR_"/>
+          <LN desc="KN settings" inst="1" lnType="GGIO_152KSZ41c_KN" lnClass="GGIO" prefix="SetKN_"/>
+          <LN desc="KM settings" inst="1" lnType="GGIO_152KSZ41c_KM" lnClass="GGIO" prefix="SetKM_"/>		  
+          <LN desc="SYN settings" inst="1" lnType="GGIO_152KSZ41c_SYN" lnClass="GGIO" prefix="SetSYN_"/>
+          <LN desc="DIAG settings" inst="1" lnType="GGIO_152KSZ41c_DIAG" lnClass="GGIO" prefix="SetDIAG_"/>
+          <LN desc="VYZ settings" inst="1" lnType="GGIO_152KSZ41c_VYZ" lnClass="GGIO" prefix="SetVYZ_"/>
+          <LN desc="RES settings" inst="1" lnType="GGIO_152KSZ41c_RES" lnClass="GGIO" prefix="SetRES_"/>
+          <LN desc="OTHER settings" inst="1" lnType="GGIO_152KSZ41c_OTHER" lnClass="GGIO" prefix="SetOTHER_"/>
+		  <LN desc="OSC settings" inst="1" lnType="GGIO_152KSZ41c_OSC" lnClass="GGIO" prefix="SetOSC_"/>
+         </LDevice>
+      </Server>
+    </AccessPoint>
+  </IED>
+ <DataTypeTemplates>
+    <!-- LOGICAL NODES  -->
+   <LNodeType lnClass="CALH" id="CALH_MT_0">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="GrAlm" type="Sps_MT_1" desc="Avar.otkl."/>
+      <DO name="GrWrn" type="Sps_MT_1" desc="Vyzov"/>
+      <DO name="AlmReset" type="SpcEx_MT_2" desc="Command Kvit"/>
+   </LNodeType>
+    <LNodeType lnClass="CSWI" id="CSWI_MT_A">
+      <DO name="Mod" type="Enc_Mod_MT_1"/>
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Pos" type="Dpc_MT_1" desc="Command Q"/>
+      <DO name="OpOpn" type="Act_MT_1" desc="Otkl."/>
+      <DO name="OpCls" type="Act_MT_1" desc="Vkl."/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_MT_21">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Ind1" type="Sps_MT_1"/>
+      <DO name="Ind2" type="Sps_MT_1"/>
+      <DO name="Ind3" type="Sps_MT_1"/>
+      <DO name="Ind4" type="Sps_MT_1"/>
+      <DO name="Ind5" type="Sps_MT_1"/>
+      <DO name="Ind6" type="Sps_MT_1"/>
+      <DO name="Ind7" type="Sps_MT_1"/>
+      <DO name="Ind8" type="Sps_MT_1"/>
+      <DO name="Ind9" type="Sps_MT_1"/>
+      <DO name="Ind10" type="Sps_MT_1"/>
+      <DO name="Ind11" type="Sps_MT_1"/>
+      <DO name="Ind12" type="Sps_MT_1"/>
+      <DO name="Ind13" type="Sps_MT_1"/>
+      <DO name="Ind14" type="Sps_MT_1"/>
+      <DO name="Ind15" type="Sps_MT_1"/>
+      <DO name="Ind16" type="Sps_MT_1"/>
+      <DO name="Ind17" type="Sps_MT_1"/>
+      <DO name="Ind18" type="Sps_MT_1"/>
+      <DO name="Ind19" type="Sps_MT_1"/>
+      <DO name="Ind20" type="Sps_MT_1"/>
+      <DO name="Ind21" type="Sps_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_MT_22">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Ind1" type="Sps_MT_1"/>
+      <DO name="Ind2" type="Sps_MT_1"/>
+      <DO name="Ind3" type="Sps_MT_1"/>
+      <DO name="Ind4" type="Sps_MT_1"/>
+      <DO name="Ind5" type="Sps_MT_1"/>
+      <DO name="Ind6" type="Sps_MT_1"/>
+      <DO name="Ind7" type="Sps_MT_1"/>
+      <DO name="Ind8" type="Sps_MT_1"/>
+      <DO name="Ind9" type="Sps_MT_1"/>
+      <DO name="Ind10" type="Sps_MT_1"/>
+      <DO name="Ind11" type="Sps_MT_1"/>
+      <DO name="Ind12" type="Sps_MT_1"/>
+      <DO name="Ind13" type="Sps_MT_1"/>
+      <DO name="Ind14" type="Sps_MT_1"/>
+      <DO name="Ind15" type="Sps_MT_1"/>
+      <DO name="Ind16" type="Sps_MT_1"/>
+      <DO name="Ind17" type="Sps_MT_1"/>
+      <DO name="Ind18" type="Sps_MT_1"/>
+      <DO name="Ind19" type="Sps_MT_1"/>
+      <DO name="Ind20" type="Sps_MT_1"/>
+      <DO name="Ind21" type="Sps_MT_1"/>
+      <DO name="Ind22" type="Sps_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GAPC" id="GAPC_152KSZ41">
+       <DO name="Beh" type="Ens_Beh_MT_1"/>
+       <DO name="Ind1" type="Sps_MT_1"/>
+       <DO name="Ind2" type="Sps_MT_1"/>
+       <DO name="Ind3" type="Sps_MT_1"/>
+       <DO name="Ind4" type="Sps_MT_1"/>
+       <DO name="Ind5" type="Sps_MT_1"/>
+       <DO name="Ind6" type="Sps_MT_1"/>
+       <DO name="Ind7" type="Sps_MT_1"/>
+       <DO name="Ind8" type="Sps_MT_1"/>
+       <DO name="Ind9" type="Sps_MT_1"/>
+       <DO name="Ind10" type="Sps_MT_1"/>
+       <DO name="Ind11" type="Sps_MT_1"/>
+       <DO name="Ind12" type="Sps_MT_1"/>
+       <DO name="Ind13" type="Sps_MT_1"/>
+       <DO name="Ind14" type="Sps_MT_1"/>
+       <DO name="Ind15" type="Sps_MT_1"/>
+       <DO name="Ind16" type="Sps_MT_1"/>
+       <DO name="Ind17" type="Sps_MT_1"/>
+       <DO name="Ind18" type="Sps_MT_1"/>
+       <DO name="Ind19" type="Sps_MT_1"/>
+       <DO name="Ind20" type="Sps_MT_1"/>
+       <DO name="Ind21" type="Sps_MT_1"/>
+       <DO name="Ind22" type="Sps_MT_1"/>
+       <DO name="Ind23" type="Sps_MT_1"/>
+       <DO name="Ind24" type="Sps_MT_1"/>
+       <DO name="Ind25" type="Sps_MT_1"/>
+       <DO name="Ind26" type="Sps_MT_1"/>
+       <DO name="Ind27" type="Sps_MT_1"/>
+       <DO name="Ind28" type="Sps_MT_1"/>
+       <DO name="Ind29" type="Sps_MT_1"/>
+       <DO name="Ind30" type="Sps_MT_1"/>
+       <DO name="Ind31" type="Sps_MT_1"/>
+       <DO name="Ind32" type="Sps_MT_1"/>
+	  <DO name="SPCSO1" type="Spc_MT_2" desc="Command 1"/>
+	  <DO name="SPCSO2" type="Spc_MT_2" desc="Command 2"/>
+	  <DO name="SPCSO3" type="Spc_MT_2" desc="Command 3"/>
+	  <DO name="SPCSO4" type="Spc_MT_2" desc="Command 4"/>
+	  <DO name="SPCSO5" type="Spc_MT_2" desc="Command 5"/>
+	  <DO name="SPCSO6" type="Spc_MT_2" desc="Command 6"/>
+	  <DO name="SPCSO7" type="Spc_MT_2" desc="Command 7"/>
+	  <DO name="SPCSO8" type="Spc_MT_2" desc="Command 8"/>
+       <DO name="TA01" type="IngEx_MT_1"/>
+       <DO name="TA02" type="IngEx_MT_1"/>
+       <DO name="TA03" type="IngEx_MT_1"/>
+       <DO name="TA04" type="IngEx_MT_1"/>
+       <DO name="TA05" type="IngEx_MT_1"/>
+       <DO name="TA06" type="IngEx_MT_1"/>
+       <DO name="TA07" type="IngEx_MT_1"/>
+       <DO name="TA08" type="IngEx_MT_1"/>
+       <DO name="TA09" type="IngEx_MT_1"/>
+       <DO name="TA10" type="IngEx_MT_1"/>
+	   <DO name="TA11" type="IngEx_MT_1"/>
+       <DO name="TA12" type="IngEx_MT_1"/>
+       <DO name="TA13" type="IngEx_MT_1"/>
+       <DO name="TA14" type="IngEx_MT_1"/>
+       <DO name="TA15" type="IngEx_MT_1"/>
+       <DO name="TA16" type="IngEx_MT_1"/>
+       <DO name="TA17" type="IngEx_MT_1"/>
+       <DO name="TA18" type="IngEx_MT_1"/>
+       <DO name="TA19" type="IngEx_MT_1"/>
+       <DO name="TA20" type="IngEx_MT_1"/>
+       <DO name="TL01" type="IngEx_MT_1"/>
+       <DO name="TL02" type="IngEx_MT_1"/>
+       <DO name="TL03" type="IngEx_MT_1"/>
+       <DO name="SA01" type="SpgEx_MT_1"/>
+       <DO name="SA02" type="SpgEx_MT_1"/>
+       <DO name="SA03" type="SpgEx_MT_1"/>
+       <DO name="SA04" type="SpgEx_MT_1"/>
+       <DO name="SA05" type="SpgEx_MT_1"/>
+       <DO name="SA06" type="SpgEx_MT_1"/>
+       <DO name="SA07" type="SpgEx_MT_1"/>
+       <DO name="SA08" type="SpgEx_MT_1"/>
+       <DO name="SA09" type="SpgEx_MT_1"/>
+       <DO name="SA10" type="SpgEx_MT_1"/>
+	   <DO name="SA11" type="SpgEx_MT_1"/>
+       <DO name="SA12" type="SpgEx_MT_1"/>
+       <DO name="SA13" type="SpgEx_MT_1"/>
+       <DO name="SA14" type="SpgEx_MT_1"/>
+       <DO name="SA15" type="SpgEx_MT_1"/>
+       <DO name="SA16" type="SpgEx_MT_1"/>
+       <DO name="SA17" type="SpgEx_MT_1"/>
+       <DO name="SA18" type="SpgEx_MT_1"/>
+       <DO name="SA19" type="SpgEx_MT_1"/>
+       <DO name="SA20" type="SpgEx_MT_1"/>
+	   <DO name="SA21" type="SpgEx_MT_1"/>
+       <DO name="SA22" type="SpgEx_MT_1"/>
+       <DO name="SA23" type="SpgEx_MT_1"/>
+       <DO name="SA24" type="SpgEx_MT_1"/>
+       <DO name="SA25" type="SpgEx_MT_1"/>
+       <DO name="POmImax1" type="AsgEx_MT_1"/>
+       <DO name="POmImax2" type="AsgEx_MT_1"/>
+       <DO name="POmImax3" type="AsgEx_MT_1"/>
+       <DO name="Kzavhar" type="AsgEx_MT_1"/>
+       <DO name="Nzavhar" type="IngEx_MT_1"/>
+       <DO name="POlImax" type="AsgEx_MT_1"/>
+       <DO name="POmI2" type="AsgEx_MT_1"/>
+       <DO name="POm3I0" type="AsgEx_MT_1"/>
+       <DO name="POm3I0r" type="AsgEx_MT_1"/>
+       <DO name="POmUmax1" type="AsgEx_MT_1"/>
+       <DO name="POmUmax2" type="AsgEx_MT_1"/>
+       <DO name="POmUmax3" type="AsgEx_MT_1"/>
+       <DO name="POmUmax4" type="AsgEx_MT_1"/>
+       <DO name="POlUmax" type="AsgEx_MT_1"/>
+       <DO name="POlUmin1" type="AsgEx_MT_1"/>
+       <DO name="POlUmin2" type="AsgEx_MT_1"/>
+       <DO name="POlUmin3" type="AsgEx_MT_1"/>
+       <DO name="POlUmin4" type="AsgEx_MT_1"/>
+       <DO name="POmU21" type="AsgEx_MT_1"/>
+       <DO name="POmU22" type="AsgEx_MT_1"/>
+       <DO name="POmU23" type="AsgEx_MT_1"/>
+       <DO name="POm3U01" type="AsgEx_MT_1"/>
+       <DO name="POm3U02" type="AsgEx_MT_1"/>
+       <DO name="POmUtn2" type="AsgEx_MT_1"/>
+       <DO name="POlUtn2" type="AsgEx_MT_1"/>
+       <DO name="POmIf1" type="AsgEx_MT_1"/>
+       <DO name="POmIf2" type="AsgEx_MT_1"/>
+       <DO name="POmF1" type="AsgEx_MT_1"/>
+       <DO name="POmF2" type="AsgEx_MT_1"/>
+       <DO name="POlF1" type="AsgEx_MT_1"/>
+       <DO name="POlF2" type="AsgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_MTa_GSE4">
+		<DO name="Beh" type="Ens_Beh_MT_1"/>
+		<DO name="NamPlt" type="Lpl_MT_1"/>
+		<DO name="VIn01" type="SpsEx_MT_1"/>
+		<DO name="VIn02" type="SpsEx_MT_1"/>
+		<DO name="VIn03" type="SpsEx_MT_1"/>
+		<DO name="VIn04" type="SpsEx_MT_1"/>
+		<DO name="VIn05" type="SpsEx_MT_1"/>
+		<DO name="VIn06" type="SpsEx_MT_1"/>
+		<DO name="VIn07" type="SpsEx_MT_1"/>
+		<DO name="VIn08" type="SpsEx_MT_1"/>
+		<DO name="VIn09" type="SpsEx_MT_1"/>
+		<DO name="VIn10" type="SpsEx_MT_1"/>
+		<DO name="VIn11" type="SpsEx_MT_1"/>
+		<DO name="VIn12" type="SpsEx_MT_1"/>
+		<DO name="VIn13" type="SpsEx_MT_1"/>
+		<DO name="VIn14" type="SpsEx_MT_1"/>
+		<DO name="VIn15" type="SpsEx_MT_1"/>
+		<DO name="VIn16" type="SpsEx_MT_1"/>
+		<DO name="VIn17" type="SpsEx_MT_1"/>
+		<DO name="VIn18" type="SpsEx_MT_1"/>
+		<DO name="VIn19" type="SpsEx_MT_1"/>
+		<DO name="VIn20" type="SpsEx_MT_1"/>
+		<DO name="VIn21" type="SpsEx_MT_1"/>
+		<DO name="VIn22" type="SpsEx_MT_1"/>
+		<DO name="VIn23" type="SpsEx_MT_1"/>
+		<DO name="VIn24" type="SpsEx_MT_1"/>
+		<DO name="VIn25" type="SpsEx_MT_1"/>
+		<DO name="VIn26" type="SpsEx_MT_1"/>
+		<DO name="VIn27" type="SpsEx_MT_1"/>
+		<DO name="VIn28" type="SpsEx_MT_1"/>
+		<DO name="VIn29" type="SpsEx_MT_1"/>
+		<DO name="VIn30" type="SpsEx_MT_1"/>
+		<DO name="VIn31" type="SpsEx_MT_1"/>
+		<DO name="VIn32" type="SpsEx_MT_1"/>
+		<DO name="VIn33" type="SpsEx_MT_1"/>
+		<DO name="VIn34" type="SpsEx_MT_1"/>
+		<DO name="VIn35" type="SpsEx_MT_1"/>
+		<DO name="VIn36" type="SpsEx_MT_1"/>
+		<DO name="VIn37" type="SpsEx_MT_1"/>
+		<DO name="VIn38" type="SpsEx_MT_1"/>
+		<DO name="VIn39" type="SpsEx_MT_1"/>
+		<DO name="VIn40" type="SpsEx_MT_1"/>
+		<DO name="VIn41" type="SpsEx_MT_1"/>
+		<DO name="VIn42" type="SpsEx_MT_1"/>
+		<DO name="VIn43" type="SpsEx_MT_1"/>
+		<DO name="VIn44" type="SpsEx_MT_1"/>
+		<DO name="VIn45" type="SpsEx_MT_1"/>
+		<DO name="VIn46" type="SpsEx_MT_1"/>
+		<DO name="VIn47" type="SpsEx_MT_1"/>
+		<DO name="VIn48" type="SpsEx_MT_1"/>
+		<DO name="VIn49" type="SpsEx_MT_1"/>
+		<DO name="VIn50" type="SpsEx_MT_1"/>
+		<DO name="VIn51" type="SpsEx_MT_1"/>
+		<DO name="VIn52" type="SpsEx_MT_1"/>
+		<DO name="VIn53" type="SpsEx_MT_1"/>
+		<DO name="VIn54" type="SpsEx_MT_1"/>
+		<DO name="VIn55" type="SpsEx_MT_1"/>
+		<DO name="VIn56" type="SpsEx_MT_1"/>
+		<DO name="VIn57" type="SpsEx_MT_1"/>
+		<DO name="VIn58" type="SpsEx_MT_1"/>
+		<DO name="VIn59" type="SpsEx_MT_1"/>
+		<DO name="VIn60" type="SpsEx_MT_1"/>
+		<DO name="VIn61" type="SpsEx_MT_1"/>
+		<DO name="VIn62" type="SpsEx_MT_1"/>
+		<DO name="VIn63" type="SpsEx_MT_1"/>
+		<DO name="VIn64" type="SpsEx_MT_1"/>
+		<DO name="VIn65" type="SpsEx_MT_1"/>
+		<DO name="VIn66" type="SpsEx_MT_1"/>
+		<DO name="VIn67" type="SpsEx_MT_1"/>
+		<DO name="VIn68" type="SpsEx_MT_1"/>
+		<DO name="VIn69" type="SpsEx_MT_1"/>
+		<DO name="VIn70" type="SpsEx_MT_1"/>
+		<DO name="VIn71" type="SpsEx_MT_1"/>
+		<DO name="VIn72" type="SpsEx_MT_1"/>
+		<DO name="VIn73" type="SpsEx_MT_1"/>
+		<DO name="VIn74" type="SpsEx_MT_1"/>
+		<DO name="VIn75" type="SpsEx_MT_1"/>
+		<DO name="VIn76" type="SpsEx_MT_1"/>
+		<DO name="VIn77" type="SpsEx_MT_1"/>
+		<DO name="VIn78" type="SpsEx_MT_1"/>
+		<DO name="VIn79" type="SpsEx_MT_1"/>
+		<DO name="VIn80" type="SpsEx_MT_1"/>
+		<DO name="VIn81" type="SpsEx_MT_1"/>
+		<DO name="VIn82" type="SpsEx_MT_1"/>
+		<DO name="VIn83" type="SpsEx_MT_1"/>
+		<DO name="VIn84" type="SpsEx_MT_1"/>
+		<DO name="VIn85" type="SpsEx_MT_1"/>
+		<DO name="VIn86" type="SpsEx_MT_1"/>
+		<DO name="VIn87" type="SpsEx_MT_1"/>
+		<DO name="VIn88" type="SpsEx_MT_1"/>
+		<DO name="VIn89" type="SpsEx_MT_1"/>
+		<DO name="VIn90" type="SpsEx_MT_1"/>
+		<DO name="VIn91" type="SpsEx_MT_1"/>
+		<DO name="VIn92" type="SpsEx_MT_1"/>
+		<DO name="VIn93" type="SpsEx_MT_1"/>
+		<DO name="VIn94" type="SpsEx_MT_1"/>
+		<DO name="VIn95" type="SpsEx_MT_1"/>
+		<DO name="VIn96" type="SpsEx_MT_1"/>
+		<DO name="VIn97" type="SpsEx_MT_1"/>
+		<DO name="VIn98" type="SpsEx_MT_1"/>
+		<DO name="VIn99" type="SpsEx_MT_1"/>
+		<DO name="VIn100" type="SpsEx_MT_1"/>
+		<DO name="VIn101" type="SpsEx_MT_1"/>
+		<DO name="VIn102" type="SpsEx_MT_1"/>
+		<DO name="VIn103" type="SpsEx_MT_1"/>
+		<DO name="VIn104" type="SpsEx_MT_1"/>
+		<DO name="VIn105" type="SpsEx_MT_1"/>
+		<DO name="VIn106" type="SpsEx_MT_1"/>
+		<DO name="VIn107" type="SpsEx_MT_1"/>
+		<DO name="VIn108" type="SpsEx_MT_1"/>
+		<DO name="VIn109" type="SpsEx_MT_1"/>
+		<DO name="VIn110" type="SpsEx_MT_1"/>
+		<DO name="VIn111" type="SpsEx_MT_1"/>
+		<DO name="VIn112" type="SpsEx_MT_1"/>
+		<DO name="VIn113" type="SpsEx_MT_1"/>
+		<DO name="VIn114" type="SpsEx_MT_1"/>
+		<DO name="VIn115" type="SpsEx_MT_1"/>
+		<DO name="VIn116" type="SpsEx_MT_1"/>
+		<DO name="VIn117" type="SpsEx_MT_1"/>
+		<DO name="VIn118" type="SpsEx_MT_1"/>
+		<DO name="VIn119" type="SpsEx_MT_1"/>
+		<DO name="VIn120" type="SpsEx_MT_1"/>
+		<DO name="VIn121" type="SpsEx_MT_1"/>
+		<DO name="VIn122" type="SpsEx_MT_1"/>
+		<DO name="VIn123" type="SpsEx_MT_1"/>
+		<DO name="VIn124" type="SpsEx_MT_1"/>
+		<DO name="VIn125" type="SpsEx_MT_1"/>
+		<DO name="VIn126" type="SpsEx_MT_1"/>
+		<DO name="VIn127" type="SpsEx_MT_1"/>
+		<DO name="VIn128" type="SpsEx_MT_1"/>
+		<DO name="VOut01" type="SpsEx_MT_1"/>
+		<DO name="VOut02" type="SpsEx_MT_1"/>
+		<DO name="VOut03" type="SpsEx_MT_1"/>
+		<DO name="VOut04" type="SpsEx_MT_1"/>
+		<DO name="VOut05" type="SpsEx_MT_1"/>
+		<DO name="VOut06" type="SpsEx_MT_1"/>
+		<DO name="VOut07" type="SpsEx_MT_1"/>
+		<DO name="VOut08" type="SpsEx_MT_1"/>
+		<DO name="VOut09" type="SpsEx_MT_1"/>
+		<DO name="VOut10" type="SpsEx_MT_1"/>
+		<DO name="VOut11" type="SpsEx_MT_1"/>
+		<DO name="VOut12" type="SpsEx_MT_1"/>
+		<DO name="VOut13" type="SpsEx_MT_1"/>
+		<DO name="VOut14" type="SpsEx_MT_1"/>
+		<DO name="VOut15" type="SpsEx_MT_1"/>
+		<DO name="VOut16" type="SpsEx_MT_1"/>
+		<DO name="VOut17" type="SpsEx_MT_1"/>
+		<DO name="VOut18" type="SpsEx_MT_1"/>
+		<DO name="VOut19" type="SpsEx_MT_1"/>
+		<DO name="VOut20" type="SpsEx_MT_1"/>
+		<DO name="VOut21" type="SpsEx_MT_1"/>
+		<DO name="VOut22" type="SpsEx_MT_1"/>
+		<DO name="VOut23" type="SpsEx_MT_1"/>
+		<DO name="VOut24" type="SpsEx_MT_1"/>
+		<DO name="VOut25" type="SpsEx_MT_1"/>
+		<DO name="VOut26" type="SpsEx_MT_1"/>
+		<DO name="VOut27" type="SpsEx_MT_1"/>
+		<DO name="VOut28" type="SpsEx_MT_1"/>
+		<DO name="VOut29" type="SpsEx_MT_1"/>
+		<DO name="VOut30" type="SpsEx_MT_1"/>
+		<DO name="VOut31" type="SpsEx_MT_1"/>
+		<DO name="VOut32" type="SpsEx_MT_1"/>
+		<DO name="VOut33" type="SpsEx_MT_1"/>
+		<DO name="VOut34" type="SpsEx_MT_1"/>
+		<DO name="VOut35" type="SpsEx_MT_1"/>
+		<DO name="VOut36" type="SpsEx_MT_1"/>
+		<DO name="VOut37" type="SpsEx_MT_1"/>
+		<DO name="VOut38" type="SpsEx_MT_1"/>
+		<DO name="VOut39" type="SpsEx_MT_1"/>
+		<DO name="VOut40" type="SpsEx_MT_1"/>
+	</LNodeType>
+	
+    <LNodeType lnClass="LLN0" id="LLN0_MT_A">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Mod" type="Enc_Mod_MT_1"/>
+      <DO name="Health" type="Ens_Heal_MT_1" desc="Device health"/>
+      <DO name="NamPlt" type="Lpl_MT_1"/>
+      <DO name="LocKey" type="Sps_MT_1" desc="MU"/>
+    </LNodeType>
+    <LNodeType lnClass="LPHD" id="LPHD_MT_1">
+      <DO name="PhyNam" type="Dpl_MT_1"/>
+      <DO name="PhyHealth" type="Ens_Heal_MT_1" desc="Device health"/>
+      <DO name="Proxy" type="Sps_MT_1"/>
+   </LNodeType>
+   
+	<LNodeType lnClass="MMXU" id="MMXU_MTa_3">
+		<DO name="Beh" type="Ens_Beh_MT_1"/>
+		<DO name="NamPlt" type="Lpl_MT_1"/>
+		<DO name="A" type="Wye_MT_4" desc="Ток Ia"/>
+	</LNodeType>
+   
+   <LNodeType lnClass="MMXU" id="MMXU_MT_152KSZ41">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Hz" type="Mv_MT_1" desc="F, Hz"/>
+      <DO name="A" type="Wye_MT_2" desc="Ia,b,c,3I0, A"/>
+      <DO name="PPV" type="Del_MT_1" desc="Uab,bc,ca, V"/>
+      <DO name="PNV" type="Wye_MT_3" desc="3U0, V"/>
+	  <DO name="PPV2" type="DelEx_MT_3" desc="Utn2, V"/>
+    </LNodeType>
+	
+    <LNodeType lnClass="MMXU" id="MMXU_MT_PWR">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+	  <DO name="NamPlt" type="Lpl_MT_1"/>
+      <DO name="TotW" type="Mv_MT_2" desc="P, kW"/>
+      <DO name="TotVAr" type="Mv_MT_2" desc="Q, kVAr"/>
+      <DO name="TotVA" type="Mv_MT_2" desc="S, kVA"/>
+      <DO name="TotPF" type="Mv_MT_1" desc="cos(phi)"/>
+    </LNodeType>
+	
+	<LNodeType lnClass="MMXU" id="MMXU_MT_Z">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+	  <DO name="Z" type="Wye_MT_1"/>
+	</LNodeType>
+	
+    <LNodeType lnClass="MSQI" id="MSQI_MT_1">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="SeqA" type="Seq_MT_1"/>
+      <DO name="SeqV" type="Seq_MT_1"/>
+    </LNodeType>
+	
+    <LNodeType lnClass="SARC" id="SARC_MT_0">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Health" type="Ens_Heal_MT_1" desc="Duga health"/>
+      <DO name="FADet" type="Sps_MT_1" desc="Duga srab"/>
+      <DO name="FACntRs" type="Inc_MT_1" desc="Duga counter"/>
+    </LNodeType>
+	
+    <LNodeType lnClass="SIMG" id="SIMG_MT_SF6">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="InsAlm" type="Sps_MT_1" desc="SF6 to alarm"/>
+      <DO name="InsBlk" type="Sps_MT_1" desc="SF6 to blocking"/>
+      <DO name="InsTr" type="Sps_MT_1" desc="SF6 to TRIP"/>
+    </LNodeType>
+
+    <LNodeType lnClass="SCBR" id="SCBR_MT_1">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="MechHealth" type="Ens_Heal_MT_1" desc="Q1 health"/>
+      <DO name="ColOpn" type="Sps_MT_1" desc="EO1/EV trip"/>
+      <DO name="ColOpn2" type="SpsEx_MT_1" desc="EO2 trip"/>
+      <DO name="AccAbr" type="Mv_MT_1" desc="Abbrasion, %"/>
+      <DO name="RctTmOpn" type="Mv_MT_1" desc="Measured Totkl, ms"/>
+    </LNodeType>
+	
+    <LNodeType lnClass="TCTR" id="TCTR_MT_1">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Rat" type="Asg_MT_1" desc="Ktt"/>
+    </LNodeType>
+    <LNodeType lnClass="TCTR" id="TCTR_MT_2">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="EEHealth" type="Ens_Heal_MT_1" desc="TT health"/>
+      <DO name="Rat" type="Asg_MT_1" desc="Ktt"/>
+    </LNodeType>
+    <LNodeType lnClass="TVTR" id="TVTR_MT_1">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Rat" type="Asg_MT_1" desc="Ktn"/>
+    </LNodeType>
+    <LNodeType lnClass="TVTR" id="TVTR_MT_2">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="EEHealth" type="Ens_Heal_MT_1" desc="TN health"/>
+      <DO name="Rat" type="Asg_MT_1" desc="Ktn"/>
+    </LNodeType>
+    <LNodeType lnClass="XCBR" id="XCBR_MT_1">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="EEHealth" type="Ens_Heal_MT_1" desc="Q1 health"/>
+      <DO name="Loc" type="Sps_MT_1" desc="Q1 AUV off"/>
+      <DO name="OpCnt" type="Ins_MT_1" desc="Q1 operation counter"/>
+      <DO name="Pos" type="Dpc_Stat_MT_1" desc="Q1 position"/>
+      <DO name="BlkOpn" type="Spc_Stat_MT_1" desc="Otkl. block"/>
+      <DO name="BlkCls" type="Spc_Stat_MT_1" desc="Vkl. block"/>
+    </LNodeType>
+
+    <LNodeType lnClass="RBRF" id="RBRF_MT_0">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="OpEx" type="Act_MT_1" desc="UROV srab"/>
+      <DO name="OpCntRs" type="Inc_MT_1" desc="UROV counter"/>
+    </LNodeType>
+    <LNodeType lnClass="RPSB" id="RPSB_MT_0">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Str" type="Acd_Nodir_MT_1" desc="UBK start"/>
+      <DO name="BlkZn" type="Sps_MT_1" desc="UBK block"/>
+    </LNodeType>
+    <LNodeType lnClass="RFLO" id="RFLO_MT_3">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="FltLoop" type="Ens_Loop_MT_1" desc="OMP loop"/>
+      <DO name="FltZ" type="Cmv_MT_1" desc="OMP Z"/>
+      <DO name="FltDiskm" type="Mv_MT_1" desc="OMP distance, km"/>
+      <DO name="Enable" type="SpgEx_MT_1" desc="S300"/>
+      <DO name="LCnt" type="IngEx_MT_1" desc="Nlin."/>
+      <DO name="ILNom" type="AsgEx_MT_1"/>
+      <DO name="L1" type="AsgEx_MT_1"/>
+      <DO name="X1" type="AsgEx_MT_1"/>
+      <DO name="L2" type="AsgEx_MT_1"/>
+      <DO name="X2" type="AsgEx_MT_1"/>
+      <DO name="L3" type="AsgEx_MT_1"/>
+      <DO name="X3" type="AsgEx_MT_1"/>
+      <DO name="L4" type="AsgEx_MT_1"/>
+      <DO name="X4" type="AsgEx_MT_1"/>
+      <DO name="L5" type="AsgEx_MT_1"/>
+      <DO name="X5" type="AsgEx_MT_1"/>
+      <DO name="L6" type="AsgEx_MT_1"/>
+      <DO name="X6" type="AsgEx_MT_1"/>
+      <DO name="L7" type="AsgEx_MT_1"/>
+      <DO name="X7" type="AsgEx_MT_1"/>
+      <DO name="L8" type="AsgEx_MT_1"/>
+      <DO name="X8" type="AsgEx_MT_1"/>
+    </LNodeType>
+	
+    <LNodeType lnClass="RREC" id="RREC_MT_150c">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="OpCls" type="Act_MT_1" desc="APV srab."/>
+      <DO name="AutoRecSt" type="Ens_Recl_MT_1" desc="APV status"/>
+      <DO name="Op11Cnt" type="IncEx_MT_1" desc="APV11 summary counter"/>
+      <DO name="Op12Cnt" type="IncEx_MT_1" desc="APV12 summary counter"/>
+      <DO name="Op21Cnt" type="IncEx_MT_1" desc="APV21 summary counter"/>
+      <DO name="Op22Cnt" type="IncEx_MT_1" desc="APV22 summary counter"/>
+      <DO name="Op11SuccCnt" type="IncEx_MT_1" desc="APV11 success counter"/>
+      <DO name="Op12SuccCnt" type="IncEx_MT_1" desc="APV12 success counter"/>
+      <DO name="Op21SuccCnt" type="IncEx_MT_1" desc="APV21 success counter"/>
+      <DO name="Op22SuccCnt" type="IncEx_MT_1" desc="APV22 success counter"/>
+      <DO name="Op11FailCnt" type="IncEx_MT_1" desc="APV11 fail counter"/>
+      <DO name="Op12FailCnt" type="IncEx_MT_1" desc="APV12 fail counter"/>
+      <DO name="Op21FailCnt" type="IncEx_MT_1" desc="APV21 fail counter"/>
+      <DO name="Op22FailCnt" type="IncEx_MT_1" desc="APV22 fail counter"/>
+    </LNodeType>
+	
+    <LNodeType lnClass="RSYN" id="RSYN_MT_0">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Rel" type="Sps_MT_1" desc="Sync on"/>
+      <DO name="Blk" type="Sps_MT_1" desc="Sync blocked"/>
+    </LNodeType>
+    <LNodeType lnClass="RDRE" id="RDRE_MT_1">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="RcdMade" type="Sps_MT_1" desc="Osc record made"/>
+      <DO name="FltNum" type="Ins_MT_1"/>
+      <DO name="RcdStr" type="Sps_MT_1" desc="Osc recording"/>
+	  <DO name="RcdTrg" type="Spc_MT_2" desc="Osc command"/>
+    </LNodeType>
+
+	<LNodeType lnClass="PTUF" id="PTUF_MT_KSZ">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Str" type="Acd_Nodir_MT_1" desc="ACHR start"/>
+	 <DO name="Op" type="Act_MT_1" desc="ACHR srab"/>
+      <DO name="OpCntRs" type="Inc_MT_1" desc="Operate counter"/>
+	 <DO name="Reset" type="SpcEx_MT_2" desc="Vozvrat"/>
+	</LNodeType>
+	
+	<LNodeType lnClass="PTUV" id="PTUV_MT_KSZ">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Str" type="Acd_Nodir_MT_1" desc="ARSN start"/>
+	 <DO name="Op" type="Act_MT_1" desc="ARSN srab"/>
+      <DO name="OpCntRs" type="Inc_MT_1" desc="Operate counter"/>
+	 <DO name="Reset" type="SpcEx_MT_2" desc="Vozvrat"/>
+	</LNodeType>
+	
+	<LNodeType lnClass="PTRC" id="PTRC_MT_0">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="Tr" type="Act_MT_1" desc="Srab.zasch. otkl."/>
+      <DO name="OpCntRs" type="Inc_MT_1" desc="Summary operate counter"/>
+	 </LNodeType>
+	 
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_KCN">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="KCNS1" type="SpgEx_MT_1"/>
+      <DO name="KCNS2" type="SpgEx_MT_1"/>
+      <DO name="KCNS4" type="SpgEx_MT_1"/>
+      <DO name="KCNT1" type="IngEx_MT_1"/>
+      <DO name="KCNT2" type="IngEx_MT_1"/>
+	</LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_KCT">
+        <DO name="Beh" type="Ens_Beh_MT_1"/>
+        <DO name="KCTbS1" type="SpgEx_MT_1"/>
+        <DO name="KCTmS1" type="SpgEx_MT_1"/>
+        <DO name="KCTb3I0r" type="AsgEx_MT_1"/>
+        <DO name="KCTbImax" type="AsgEx_MT_1"/>
+        <DO name="KCTb3I0" type="AsgEx_MT_1"/>
+        <DO name="KCTmImax" type="AsgEx_MT_1"/>
+        <DO name="KCTmImin" type="AsgEx_MT_1"/>
+        <DO name="KCTmT" type="IngEx_MT_1"/>
+    </LNodeType>		
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_UBK">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="UBKS1" type="SpgEx_MT_1"/>
+      <DO name="UBKDI2" type="AsgEx_MT_1"/>
+      <DO name="UBKDI" type="AsgEx_MT_1"/>
+      <DO name="UBKT" type="IngEx_MT_1"/>
+	</LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_DZMF">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="DZMFS1" type="SpgEx_MT_1"/>
+      <DO name="DZMFRn" type="AsgEx_MT_1"/>
+      <DO name="DZMFPhin" type="AsgEx_MT_1"/>
+      <DO name="DZMF1S1" type="SpgEx_MT_1"/>
+      <DO name="DZMF1S2" type="SpgEx_MT_1"/>
+      <DO name="DZMF1S3" type="SpgEx_MT_1"/>
+      <DO name="DZMF1S4" type="SpgEx_MT_1"/>
+      <DO name="DZMF1S5" type="SpgEx_MT_1"/>
+      <DO name="DZMF1Nhar" type="IngEx_MT_1"/>
+      <DO name="DZMF1Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZMF1Phi" type="AsgEx_MT_1"/>
+      <DO name="DZMF1Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZMF1Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZMF1Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZMF1Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZMF1Phi2" type="AsgEx_MT_1"/>
+      <DO name="DZMF1T" type="IngEx_MT_1"/>
+      <DO name="DZMF2S1" type="SpgEx_MT_1"/>
+      <DO name="DZMF2S2" type="SpgEx_MT_1"/>
+      <DO name="DZMF2S3" type="SpgEx_MT_1"/>
+      <DO name="DZMF2S4" type="SpgEx_MT_1"/>
+      <DO name="DZMF2S5" type="SpgEx_MT_1"/>
+      <DO name="DZMF2Nhar" type="IngEx_MT_1"/>
+      <DO name="DZMF2Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZMF2Phi" type="AsgEx_MT_1"/>
+      <DO name="DZMF2Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZMF2Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZMF2Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZMF2Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZMF2Phi2" type="AsgEx_MT_1"/>
+      <DO name="DZMF2T" type="IngEx_MT_1"/>
+      <DO name="DZMF3S1" type="SpgEx_MT_1"/>
+      <DO name="DZMF3S2" type="SpgEx_MT_1"/>
+      <DO name="DZMF3S3" type="SpgEx_MT_1"/>
+      <DO name="DZMF3S4" type="SpgEx_MT_1"/>
+      <DO name="DZMF3Nhar" type="IngEx_MT_1"/>
+      <DO name="DZMF3Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZMF3Phi" type="AsgEx_MT_1"/>
+      <DO name="DZMF3Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZMF3Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZMF3Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZMF3Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZMF3Phi2" type="AsgEx_MT_1"/>
+      <DO name="DZMF3T" type="IngEx_MT_1"/>
+      <DO name="DZMFd1S1" type="SpgEx_MT_1"/>
+      <DO name="DZMFd2S1" type="SpgEx_MT_1"/>
+      <DO name="DZMFd3S1" type="SpgEx_MT_1"/>
+      <DO name="DZMFd1Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZMFd1Phi" type="AsgEx_MT_1"/>
+      <DO name="DZMFd1Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZMFd1Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZMFd1Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZMFd1Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZMFd1Phi2" type="AsgEx_MT_1"/>
+      <DO name="DZMFd2Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZMFd2Phi" type="AsgEx_MT_1"/>
+      <DO name="DZMFd2Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZMFd2Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZMFd2Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZMFd2Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZMFd2Phi2" type="AsgEx_MT_1"/>
+      <DO name="DZMFd3Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZMFd3Phi" type="AsgEx_MT_1"/>
+      <DO name="DZMFd3Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZMFd3Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZMFd3Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZMFd3Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZMFd3Phi2" type="AsgEx_MT_1"/>
+	</LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_UDZMF">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="UDZMFS1" type="SpgEx_MT_1"/>
+      <DO name="UDZMFT" type="IngEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_DZDV">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="DZDVS1" type="SpgEx_MT_1"/>
+      <DO name="DZDVKkomp" type="AsgEx_MT_1"/>
+      <DO name="DZDVRn" type="AsgEx_MT_1"/>
+      <DO name="DZDVPhin" type="AsgEx_MT_1"/>
+      <DO name="DZDV1TA0" type="IngEx_MT_1"/>
+      <DO name="DZDV1TB0" type="IngEx_MT_1"/>
+      <DO name="DZDV1TC0" type="IngEx_MT_1"/>
+	  <DO name="DZDV2TA0" type="IngEx_MT_1"/>
+      <DO name="DZDV2TB0" type="IngEx_MT_1"/>
+      <DO name="DZDV2TC0" type="IngEx_MT_1"/>
+	  <DO name="DZDV3TA0" type="IngEx_MT_1"/>
+      <DO name="DZDV3TB0" type="IngEx_MT_1"/>
+      <DO name="DZDV3TC0" type="IngEx_MT_1"/>
+      <DO name="DZDV1S1" type="SpgEx_MT_1"/>
+      <DO name="DZDV1S2" type="SpgEx_MT_1"/>
+      <DO name="DZDV1S3" type="SpgEx_MT_1"/>
+      <DO name="DZDV1Nhar" type="IngEx_MT_1"/>
+      <DO name="DZDV1Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZDV1Phi" type="AsgEx_MT_1"/>
+      <DO name="DZDV1Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZDV1Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZDV1Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZDV1Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZDV1Phi2" type="AsgEx_MT_1"/>
+      <DO name="DZDV2S1" type="SpgEx_MT_1"/>
+      <DO name="DZDV2S2" type="SpgEx_MT_1"/>
+      <DO name="DZDV2S3" type="SpgEx_MT_1"/>
+      <DO name="DZDV2Nhar" type="IngEx_MT_1"/>
+      <DO name="DZDV2Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZDV2Phi" type="AsgEx_MT_1"/>
+      <DO name="DZDV2Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZDV2Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZDV2Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZDV2Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZDV2Phi2" type="AsgEx_MT_1"/>
+      <DO name="DZDV3S1" type="SpgEx_MT_1"/>
+      <DO name="DZDV3S2" type="SpgEx_MT_1"/>
+      <DO name="DZDV3S3" type="SpgEx_MT_1"/>
+      <DO name="DZDV3Nhar" type="IngEx_MT_1"/>
+      <DO name="DZDV3Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZDV3Phi" type="AsgEx_MT_1"/>
+      <DO name="DZDV3Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZDV3Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZDV3Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZDV3Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZDV3Phi2" type="AsgEx_MT_1"/>
+      <DO name="DZDVd1S1" type="SpgEx_MT_1"/>
+      <DO name="DZDVd2S1" type="SpgEx_MT_1"/>
+      <DO name="DZDVd3S1" type="SpgEx_MT_1"/>
+      <DO name="DZDVd1Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZDVd1Phi" type="AsgEx_MT_1"/>
+      <DO name="DZDVd1Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZDVd1Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZDVd1Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZDVd1Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZDVd1Phi2" type="AsgEx_MT_1"/>
+      <DO name="DZDVd2Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZDVd2Phi" type="AsgEx_MT_1"/>
+      <DO name="DZDVd2Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZDVd2Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZDVd2Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZDVd2Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZDVd2Phi2" type="AsgEx_MT_1"/>
+      <DO name="DZDVd3Zsr" type="AsgEx_MT_1"/>
+      <DO name="DZDVd3Phi" type="AsgEx_MT_1"/>
+      <DO name="DZDVd3Zsm" type="AsgEx_MT_1"/>
+      <DO name="DZDVd3Rsr" type="AsgEx_MT_1"/>
+      <DO name="DZDVd3Ksm" type="AsgEx_MT_1"/>
+      <DO name="DZDVd3Phi1" type="AsgEx_MT_1"/>
+      <DO name="DZDVd3Phi2" type="AsgEx_MT_1"/>
+	  <DO name="DZDV3I0" type="AsgEx_MT_1"/>
+	</LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_UDZDV">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="UDZDVS1" type="SpgEx_MT_1"/>
+      <DO name="UDZDVT" type="IngEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_TO">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="TO1S1" type="SpgEx_MT_1"/>
+      <DO name="TO1S2" type="IngEx_MT_1"/>
+      <DO name="TO1S3" type="SpgEx_MT_1"/>
+      <DO name="TO2S1" type="SpgEx_MT_1"/>
+      <DO name="TO2S2" type="IngEx_MT_1"/>
+      <DO name="TO2S3" type="SpgEx_MT_1"/>
+      <DO name="TO1I" type="AsgEx_MT_1"/>
+	  <DO name="TO1T" type="IngEx_MT_1"/>
+      <DO name="TO2I" type="AsgEx_MT_1"/>
+      <DO name="TO2T" type="IngEx_MT_1"/>
+      <DO name="BLK2hS1" type="SpgEx_MT_1"/>
+      <DO name="BLK2hI2hI1h" type="AsgEx_MT_1"/>
+      <DO name="BLK2hI" type="AsgEx_MT_1"/>
+      <DO name="BLK2hT" type="IngEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_MTZ">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="MTZ1S1" type="SpgEx_MT_1"/>
+      <DO name="MTZ1S2" type="IngEx_MT_1"/>
+      <DO name="MTZ1S3" type="IngEx_MT_1"/>
+      <DO name="MTZ1S4" type="SpgEx_MT_1"/>
+      <DO name="MTZ1I" type="AsgEx_MT_1"/>
+      <DO name="MTZ1T" type="IngEx_MT_1"/>
+      <DO name="MTZ1Nhar" type="IngEx_MT_1"/>
+      <DO name="MTZ1K" type="AsgEx_MT_1"/>
+      <DO name="MTZ1U" type="AsgEx_MT_1"/>
+      <DO name="MTZ1U2" type="AsgEx_MT_1"/>
+      <DO name="MTZ2S1" type="SpgEx_MT_1"/>
+      <DO name="MTZ2I" type="AsgEx_MT_1"/>
+      <DO name="MTZ2T" type="IngEx_MT_1"/>
+      <DO name="MTZ3S1" type="SpgEx_MT_1"/>
+      <DO name="MTZ3S2" type="IngEx_MT_1"/>
+      <DO name="MTZ3S3" type="IngEx_MT_1"/>
+      <DO name="MTZ3I" type="AsgEx_MT_1"/>
+      <DO name="MTZ3T" type="IngEx_MT_1"/>
+      <DO name="MTZ3U" type="AsgEx_MT_1"/>
+      <DO name="MTZ3U2" type="AsgEx_MT_1"/>
+      <DO name="RNMPhiMCh" type="AsgEx_MT_1"/>	
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_UMTZ">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="UMTZS1" type="SpgEx_MT_1"/>
+      <DO name="UMTZT" type="IngEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_LZSH">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="LZSHS1" type="SpgEx_MT_1"/>
+      <DO name="LZSHS2" type="SpgEx_MT_1"/>
+      <DO name="LZSHS3" type="IngEx_MT_1"/>
+      <DO name="LZSHT" type="IngEx_MT_1"/>
+      <DO name="LZSHI" type="AsgEx_MT_1"/>
+      <DO name="LZSHU" type="AsgEx_MT_1"/>
+      <DO name="LZSHU2" type="AsgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_DGZ">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="DGZS1" type="SpgEx_MT_1"/>
+      <DO name="DGZS2" type="SpgEx_MT_1"/>
+      <DO name="DGZS3" type="SpgEx_MT_1"/>
+      <DO name="DGZS4" type="SpgEx_MT_1"/>
+      <DO name="DGZI" type="AsgEx_MT_1"/>
+      <DO name="DGZU" type="AsgEx_MT_1"/>
+      <DO name="DGZ3U0" type="AsgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_ZPP">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="ZPPS1" type="SpgEx_MT_1"/>
+      <DO name="ZPPT" type="IngEx_MT_1"/>
+      <DO name="ZPPF" type="AsgEx_MT_1"/>
+      </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_ZMN">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="ZMN1S1" type="SpgEx_MT_1"/>
+      <DO name="ZMN1S2" type="SpgEx_MT_1"/>
+      <DO name="ZMN1S3" type="SpgEx_MT_1"/>
+      <DO name="ZMN2S1" type="SpgEx_MT_1"/>
+      <DO name="ZMN2S2" type="SpgEx_MT_1"/>
+      <DO name="ZMN2S3" type="SpgEx_MT_1"/>
+      <DO name="ZMN1U" type="AsgEx_MT_1"/>
+      <DO name="ZMN1U2" type="AsgEx_MT_1"/>
+      <DO name="ZMN2U" type="AsgEx_MT_1"/>
+      <DO name="ZMN2U2" type="AsgEx_MT_1"/>
+      <DO name="ZMN1T" type="IngEx_MT_1"/>
+      <DO name="ZMN2T" type="IngEx_MT_1"/>
+    </LNodeType>	
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_ZOZZ">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="ZOZZ1S1" type="SpgEx_MT_1"/>
+      <DO name="ZOZZ1S2" type="IngEx_MT_1"/>
+      <DO name="ZOZZ13U0" type="AsgEx_MT_1"/>	  
+      <DO name="ZOZZ13I0" type="AsgEx_MT_1"/>
+      <DO name="RNMnpPhiMCh" type="AsgEx_MT_1"/>
+      <DO name="RNMnpPhiZone" type="AsgEx_MT_1"/>
+      <DO name="ZOZZ1T" type="IngEx_MT_1"/>
+      <DO name="ZOZZ2S1" type="SpgEx_MT_1"/>
+      <DO name="ZOZZ2S2" type="IngEx_MT_1"/>
+      <DO name="ZOZZ2S3" type="SpgEx_MT_1"/>
+      <DO name="ZOZZ23I0" type="AsgEx_MT_1"/>
+      <DO name="ZOZZ23U0" type="AsgEx_MT_1"/>
+      <DO name="ZOZZ2T" type="IngEx_MT_1"/>
+      <DO name="SNOZZS1" type="SpgEx_MT_1"/>
+      <DO name="SNOZZS2" type="SpgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_ZPN">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="ZPNS1" type="SpgEx_MT_1"/>
+      <DO name="ZPNU" type="AsgEx_MT_1"/>
+      <DO name="ZPNT" type="IngEx_MT_1"/>
+    </LNodeType>	
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_ZOF">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="ZOF1S1" type="SpgEx_MT_1"/>
+      <DO name="ZOF1S2" type="SpgEx_MT_1"/>
+      <DO name="ZOF1T" type="IngEx_MT_1"/>
+      <DO name="ZOF1I2" type="AsgEx_MT_1"/>
+      <DO name="ZOF1K" type="AsgEx_MT_1"/>
+      <DO name="ZOF2I2" type="AsgEx_MT_1"/>
+      <DO name="ZOF2U2" type="AsgEx_MT_1"/>
+      <DO name="ZOF2S1" type="SpgEx_MT_1"/>
+      <DO name="ZOF2S3" type="IngEx_MT_1"/>
+      <DO name="ZOF2Tpr" type="IngEx_MT_1"/>
+      <DO name="ZOF2Tobr" type="IngEx_MT_1"/>
+      <DO name="RNMopPhiMCh" type="AsgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_UROV">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="UROVS1" type="SpgEx_MT_1"/>
+      <DO name="UROVS2" type="SpgEx_MT_1"/>
+      <DO name="UROVT" type="IngEx_MT_1"/>
+      <DO name="UROVI" type="AsgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_APV">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="APVS1" type="SpgEx_MT_1"/>
+      <DO name="APVS2" type="SpgEx_MT_1"/>
+      <DO name="APVT1c" type="IngEx_MT_1"/>
+      <DO name="APVT2c" type="IngEx_MT_1"/>
+      <DO name="APVTgot" type="IngEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_ACHR_A_B">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="ACHRCHAPVS1" type="SpgEx_MT_1"/>
+      <DO name="ACHRLS1" type="SpgEx_MT_1"/>
+      <DO name="ACHRLT" type="IngEx_MT_1"/>
+      <DO name="CHAPVLS1" type="SpgEx_MT_1"/>
+      <DO name="CHAPVLT" type="IngEx_MT_1"/>	  
+      <DO name="CHAPVLTgot" type="IngEx_MT_1"/>	
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_ACHR_ARSN">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="ACHR1S1" type="SpgEx_MT_1"/>
+      <DO name="ACHR1S2" type="SpgEx_MT_1"/>
+      <DO name="ACHR2S1" type="SpgEx_MT_1"/>
+      <DO name="ACHR2S2" type="SpgEx_MT_1"/>
+      <DO name="ACHRCS1" type="SpgEx_MT_1"/>
+      <DO name="ACHR1F" type="AsgEx_MT_1"/>
+      <DO name="ACHR1dFdt" type="AsgEx_MT_1"/>
+      <DO name="ACHR2Fv" type="AsgEx_MT_1"/>
+      <DO name="ACHR2Fp" type="AsgEx_MT_1"/>
+      <DO name="ACHR2U" type="AsgEx_MT_1"/>
+      <DO name="ACHRCdFdt" type="AsgEx_MT_1"/>
+      <DO name="ACHRCF" type="AsgEx_MT_1"/>
+      <DO name="ACHR1T" type="IngEx_MT_1"/>
+      <DO name="ACHRTimp" type="IngEx_MT_1"/>
+      <DO name="ACHR2Tf" type="IngEx_MT_1"/>
+      <DO name="ACHR2Tu" type="IngEx_MT_1"/>
+      <DO name="ARSNS1" type="SpgEx_MT_1"/>	
+      <DO name="ARSNS2" type="SpgEx_MT_1"/>
+      <DO name="ARSNU" type="AsgEx_MT_1"/>	
+      <DO name="ARSNU2" type="AsgEx_MT_1"/>	
+      <DO name="ARSNT" type="IngEx_MT_1"/>
+	  <DO name="ARSNTimp" type="IngEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_CHAPV_APVN">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="CHAPVS1" type="SpgEx_MT_1"/>
+      <DO name="CHAPVS2" type="SpgEx_MT_1"/>
+      <DO name="CHAPVF" type="AsgEx_MT_1"/>
+      <DO name="CHAPVU" type="AsgEx_MT_1"/>
+      <DO name="CHAPVT" type="IngEx_MT_1"/>
+      <DO name="CHAPVTgot" type="IngEx_MT_1"/>
+      <DO name="CHAPVTimp" type="IngEx_MT_1"/>
+      <DO name="APVNS1" type="SpgEx_MT_1"/>	
+      <DO name="APVNU" type="AsgEx_MT_1"/>
+      <DO name="APVNTgot" type="IngEx_MT_1"/>
+      <DO name="APVNT" type="IngEx_MT_1"/>
+      <DO name="APVNTcontr" type="IngEx_MT_1"/>
+      <DO name="APVNTimp" type="IngEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_AVR">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="AVRS1" type="SpgEx_MT_1"/>
+      <DO name="AVRS2" type="SpgEx_MT_1"/>
+      <DO name="AVRS3" type="SpgEx_MT_1"/>
+      <DO name="AVRS4" type="SpgEx_MT_1"/>
+      <DO name="AVRS5" type="SpgEx_MT_1"/>
+      <DO name="AVRS6" type="SpgEx_MT_1"/>
+      <DO name="AVRS7" type="SpgEx_MT_1"/>
+      <DO name="AVRT" type="IngEx_MT_1"/>
+      <DO name="AVRTvn" type="IngEx_MT_1"/>
+      <DO name="AVRTzpp" type="IngEx_MT_1"/>
+      <DO name="AVRTzppsv" type="IngEx_MT_1"/>
+      <DO name="AVRU" type="AsgEx_MT_1"/>
+      <DO name="AVRUtn2" type="AsgEx_MT_1"/>
+      <DO name="AVRU2" type="AsgEx_MT_1"/>
+      <DO name="AVRF" type="AsgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_VNR">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="VNRS1" type="SpgEx_MT_1"/>
+      <DO name="VNRS2" type="SpgEx_MT_1"/>
+      <DO name="VNRT" type="IngEx_MT_1"/>
+      <DO name="VNRTozid" type="IngEx_MT_1"/>
+      <DO name="VNRU" type="AsgEx_MT_1"/>
+      <DO name="VNRUtn2" type="AsgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_RAVR">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="RAVRS1" type="SpgEx_MT_1"/>
+      <DO name="RAVRS2" type="SpgEx_MT_1"/>
+      <DO name="RAVRS3" type="SpgEx_MT_1"/>
+      <DO name="RAVRU" type="AsgEx_MT_1"/>
+      <DO name="RAVRUtn2" type="AsgEx_MT_1"/>
+      <DO name="RAVRU2" type="AsgEx_MT_1"/>
+      <DO name="RAVRF" type="AsgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_KN">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="KNTN1S1" type="SpgEx_MT_1"/>
+      <DO name="KNTN1S2" type="SpgEx_MT_1"/>
+      <DO name="KNTN1S3" type="SpgEx_MT_1"/>
+	  <DO name="KNTN2S1" type="SpgEx_MT_1"/>
+      <DO name="VklKNS1" type="SpgEx_MT_1"/>
+      <DO name="VklKNS2" type="SpgEx_MT_1"/>
+      <DO name="VklKNS3" type="SpgEx_MT_1"/>
+      <DO name="KNTN1Um" type="AsgEx_MT_1"/>
+      <DO name="KNTN1Ul" type="AsgEx_MT_1"/>
+      <DO name="KNTN1U2" type="AsgEx_MT_1"/>
+      <DO name="KNTN13U0" type="AsgEx_MT_1"/>
+      <DO name="KNTN2Um" type="AsgEx_MT_1"/>
+      <DO name="KNTN2Ul" type="AsgEx_MT_1"/>
+      <DO name="VklKNT" type="IngEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_KM">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="KM1S1" type="SpgEx_MT_1"/>
+      <DO name="KM1S2" type="SpgEx_MT_1"/>
+      <DO name="KM1S3" type="SpgEx_MT_1"/>
+      <DO name="KM2S1" type="SpgEx_MT_1"/>
+      <DO name="KM2S2" type="SpgEx_MT_1"/>
+      <DO name="KM2S3" type="SpgEx_MT_1"/>
+      <DO name="KM1T" type="IngEx_MT_1"/>
+      <DO name="KM1Tv" type="IngEx_MT_1"/>
+      <DO name="KM2T" type="IngEx_MT_1"/>
+      <DO name="KM2Tv" type="IngEx_MT_1"/>
+	  <DO name="KMfazaIf" type="IngEx_MT_1"/>
+      <DO name="KM1S" type="AsgEx_MT_1"/>
+      <DO name="KM2S" type="AsgEx_MT_1"/>
+      <DO name="KM1Phi" type="AsgEx_MT_1"/>
+      <DO name="KM2Phi" type="AsgEx_MT_1"/>
+      <DO name="KMUmin" type="AsgEx_MT_1"/>
+    </LNodeType>	
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_SYN">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="KSS1" type="SpgEx_MT_1"/>
+      <DO name="KSS2" type="SpgEx_MT_1"/>
+      <DO name="KSS3" type="SpgEx_MT_1"/>
+      <DO name="KSS4" type="SpgEx_MT_1"/>
+      <DO name="KSS5" type="IngEx_MT_1"/>
+      <DO name="KSS6" type="SpgEx_MT_1"/>
+      <DO name="KST" type="IngEx_MT_1"/>
+      <DO name="KSK" type="AsgEx_MT_1"/>
+      <DO name="KSTvkl" type="AsgEx_MT_1"/>
+      <DO name="KSU" type="AsgEx_MT_1"/>
+      <DO name="KSU2" type="AsgEx_MT_1"/>
+      <DO name="KSdU" type="AsgEx_MT_1"/>
+      <DO name="KSdF" type="AsgEx_MT_1"/>
+      <DO name="KSdPhi" type="AsgEx_MT_1"/>
+      <DO name="KSPhipov" type="AsgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_DIAG">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="DIAGS1" type="SpgEx_MT_1"/>
+      <DO name="DIAGS2" type="SpgEx_MT_1"/>
+      <DO name="DIAGS3" type="SpgEx_MT_1"/>
+      <DO name="DIAGS4" type="SpgEx_MT_1"/>
+      <DO name="DIAGTrporpv" type="IngEx_MT_1"/>
+      <DO name="DIAGTprug" type="IngEx_MT_1"/>
+      <DO name="DIAGTotkl" type="IngEx_MT_1"/>
+      <DO name="DIAGTvkl" type="IngEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_VYZ">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="VYZTO1" type="SpgEx_MT_1"/>
+      <DO name="VYZTO2" type="SpgEx_MT_1"/>
+      <DO name="VYZMTZ1" type="SpgEx_MT_1"/>
+      <DO name="VYZMTZ2" type="SpgEx_MT_1"/>
+      <DO name="VYZMTZ3" type="SpgEx_MT_1"/>
+      <DO name="VYZUMTZ" type="SpgEx_MT_1"/>
+      <DO name="VYZDGZsrab" type="SpgEx_MT_1"/>
+      <DO name="VYZUrovp" type="SpgEx_MT_1"/>
+      <DO name="VYZUrov" type="SpgEx_MT_1"/>
+      <DO name="VYZLZSHneisp" type="SpgEx_MT_1"/>
+      <DO name="VYZLZSHsrab" type="SpgEx_MT_1"/>
+      <DO name="VYZDGZneisp" type="SpgEx_MT_1"/>
+      <DO name="VYZZOF1" type="SpgEx_MT_1"/>
+      <DO name="VYZZOF2" type="SpgEx_MT_1"/>
+      <DO name="VYZSO" type="SpgEx_MT_1"/>
+      <DO name="VYZneispvikl" type="SpgEx_MT_1"/>
+      <DO name="VYZneispTN1" type="SpgEx_MT_1"/>
+      <DO name="VYZneispTN2" type="SpgEx_MT_1"/>
+      <DO name="VYZSF6blokup" type="SpgEx_MT_1"/>
+      <DO name="VYZSF6Q1" type="SpgEx_MT_1"/>
+      <DO name="VYZresvikl" type="SpgEx_MT_1"/>
+      <DO name="VYZZMN1" type="SpgEx_MT_1"/>
+      <DO name="VYZZMN2" type="SpgEx_MT_1"/>
+      <DO name="VYZZPN" type="SpgEx_MT_1"/>
+      <DO name="VYZAVR" type="SpgEx_MT_1"/>
+      <DO name="VYZZPP" type="SpgEx_MT_1"/>
+      <DO name="VYZZOZZ1" type="SpgEx_MT_1"/>
+      <DO name="VYZZOZZ2" type="SpgEx_MT_1"/>
+	  <DO name="VYZSNOZZ" type="SpgEx_MT_1"/>
+      <DO name="VYZACHR" type="SpgEx_MT_1"/>
+      <DO name="VYZCHAPV" type="SpgEx_MT_1"/>
+      <DO name="VYZARSN" type="SpgEx_MT_1"/>
+      <DO name="VYZAPVN" type="SpgEx_MT_1"/>	
+      <DO name="VYZneuspVNR" type="SpgEx_MT_1"/>
+      <DO name="VYZKCT" type="SpgEx_MT_1"/>
+      <DO name="VYZKM1" type="SpgEx_MT_1"/>
+      <DO name="VYZKM2" type="SpgEx_MT_1"/>
+      <DO name="VYZDZMF1" type="SpgEx_MT_1"/>
+      <DO name="VYZDZMF2" type="SpgEx_MT_1"/>
+      <DO name="VYZDZMF3" type="SpgEx_MT_1"/>
+      <DO name="VYZUDZMF" type="SpgEx_MT_1"/>
+      <DO name="VYZUDZDV" type="SpgEx_MT_1"/>
+      <DO name="VYZDZDV1" type="SpgEx_MT_1"/>
+      <DO name="VYZDZDV2" type="SpgEx_MT_1"/>
+      <DO name="VYZDZDV3" type="SpgEx_MT_1"/>
+      <DO name="VYZEO1EV" type="SpgEx_MT_1"/>
+      <DO name="VYZEO2" type="SpgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_RES">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="MR" type="IngEx_MT_1"/>
+      <DO name="KRINom" type="IngEx_MT_1"/>
+      <DO name="KRIoNom" type="IngEx_MT_1"/>
+      <DO name="RESTotkl" type="IngEx_MT_1"/>
+      <DO name="RESnachzn" type="AsgEx_MT_1"/>
+      <DO name="RESINom" type="AsgEx_MT_1"/>
+      <DO name="RESIoNom" type="AsgEx_MT_1"/>
+      <DO name="RESS1" type="SpgEx_MT_1"/>
+      <DO name="RESSign" type="AsgEx_MT_1"/>
+    </LNodeType>
+    <LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_OTHER">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="AUVS1" type="SpgEx_MT_1"/>
+      <DO name="FAZS1" type="SpgEx_MT_1"/>
+      <DO name="PROGRTvoz" type="IngEx_MT_1"/>
+      <DO name="ZashEMT" type="IngEx_MT_1"/>
+      <DO name="OUS1" type="SpgEx_MT_1"/>
+      <DO name="OUS2" type="SpgEx_MT_1"/>
+      <DO name="OUS3" type="SpgEx_MT_1"/>
+      <DO name="TIS1" type="SpgEx_MT_1"/>
+      <DO name="TTS1" type="SpgEx_MT_1"/>
+      <DO name="VIKLS1" type="SpgEx_MT_1"/>
+      <DO name="OTKLTotkl" type="IngEx_MT_1"/>
+      <DO name="OTKLTimp" type="IngEx_MT_1"/>
+      <DO name="VKLTimp" type="IngEx_MT_1"/>
+      <DO name="TITf" type="IngEx_MT_1"/>
+      <DO name="TITdec" type="IngEx_MT_1"/>
+    </LNodeType>
+	<LNodeType lnClass="GGIO" id="GGIO_152KSZ41c_OSC">
+      <DO name="Beh" type="Ens_Beh_MT_1"/>
+      <DO name="OSCS1" type="SpgEx_MT_1"/>
+      <DO name="OSCTpred" type="IngEx_MT_1"/>
+      <DO name="OSCTpost" type="IngEx_MT_1"/>
+      <DO name="OSCTmax" type="IngEx_MT_1"/>
+      <DO name="OSCTblok" type="IngEx_MT_1"/>
+	</LNodeType>
+	
+    <!-- DATA OBJECTS  -->
+    <DOType cdc="ACD" id="Acd_Nodir_MT_1">
+      <DA name="general" fc="ST" dchg="true" bType="BOOLEAN"/>
+      <DA name="dirGeneral" fc="ST" dchg="true" bType="Enum" type="FaultDirectionKind"><Val>unknown</Val></DA>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+    </DOType>
+    <DOType cdc="ACT" id="Act_MT_1">
+      <DA name="general" fc="ST" dchg="true" bType="BOOLEAN"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+	  <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>IEC 61850-7-4:2007A</Val></DA>
+    </DOType>
+    <DOType cdc="ASG" id="Asg_MT_1">
+      <DA name="setMag" fc="SE" bType="Struct" type="AnVal_MT"/>
+    </DOType>
+    <DOType cdc="ASG" id="AsgEx_MT_1">
+      <DA name="setMag" fc="SE" bType="Struct" type="AnVal_MT"/>
+      <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>MTseries:2015A</Val></DA>
+    </DOType>
+    <DOType cdc="CMV" id="Cmv_MT_1">
+      <DA name="cVal" fc="MX" dchg="true" bType="Struct" type="cVal_MT"/>
+      <DA name="q" fc="MX" qchg="true" bType="Quality"/>
+      <DA name="t" fc="MX" bType="Timestamp"/>
+      <DA name="db" fc="CF" bType="INT32U"><Val>0</Val></DA>
+      <DA name="dbAng" fc="CF" bType="INT32U"><Val>0</Val></DA>
+      <DA name="zeroDb" fc="CF" bType="INT32U"><Val>0</Val></DA>
+    </DOType>
+    <DOType cdc="DEL" id="Del_MT_1">
+      <SDO name="phsAB" type="Cmv_MT_1"/>
+      <SDO name="phsBC" type="Cmv_MT_1"/>
+      <SDO name="phsCA" type="Cmv_MT_1"/>
+      <DA name="angRef" fc="CF" dchg="true" bType="Enum" type="PhaseAngleReferenceKind" valKind="RO"><Val>Aother</Val></DA>
+    </DOType>
+    <DOType cdc="DEL" id="DelEx_MT_3">
+      <SDO name="phsBC" type="Cmv_MT_1"/>
+      <DA name="angRef" fc="CF" dchg="true" bType="Enum" type="PhaseAngleReferenceKind" valKind="RO"><Val>Aother</Val></DA>
+      <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>MTseries:2015A</Val></DA>
+    </DOType>
+    <DOType cdc="DPL" id="Dpl_MT_1">
+      <DA name="vendor" fc="DC" bType="VisString255" valKind="RO"><Val>Mechanotronika</Val> </DA>
+      <DA name="hwRev" fc="DC" bType="VisString255" valKind="RO"/>
+      <DA name="swRev" fc="DC" bType="VisString255" valKind="RO"/>
+      <DA name="model" fc="DC" bType="VisString255" valKind="RO"><Val>BMRZ</Val> </DA>
+      <DA name="location" fc="DC" bType="VisString255"/>
+      <DA name="name" fc="DC" bType="VisString64"/>
+    </DOType>
+    <DOType cdc="DPC" id="Dpc_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="Dbpos"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+      <DA name="ctlModel" fc="CF" bType="Enum" type="CtlModelKind" valKind="RO"><Val>direct-with-normal-security</Val></DA>
+      <DA name="sboClass" fc="CF" bType="Enum" type="SboClassKind" valKind="RO"><Val>operate-once</Val></DA>
+      <DA name="sboTimeout" fc="CF" bType="INT32U" valKind="RO"><Val>1000</Val> </DA>
+      <DA name="SBO" fc="CO" bType="VisString129"/>
+      <DA name="Oper" fc="CO" bType="Struct" type="oper_bool_MT"/>
+      <DA name="Cancel" fc="CO" bType="Struct" type="cancel_bool_MT"/>
+	  <DA name="SBOw" fc="CO" bType="Struct" type="oper_bool_MT"/>
+      <DA name="operTimeout" fc="CF" bType="INT32U" valKind="RO"><Val>5000</Val> </DA>
+    </DOType>
+    <DOType cdc="DPC" id="Dpc_Stat_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="Dbpos"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+      <DA name="ctlModel" fc="CF" bType="Enum" type="CtlModelKind" valKind="RO"><Val>status-only</Val></DA>
+    </DOType>
+    <DOType cdc="ENC" id="Enc_Mod_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="Enum" type="BehKind"></DA>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+      <DA name="ctlModel" fc="CF" bType="Enum" type="CtlModelKind" valKind="RO"><Val>status-only</Val></DA>
+    </DOType>
+    <DOType cdc="ENS" id="Ens_Beh_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="Enum" type="BehKind"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+	  <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>IEC 61850-7-4:2007A</Val></DA>
+    </DOType>
+    <DOType cdc="ENS" id="Ens_Heal_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="Enum" type="HealthKind"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+    </DOType>
+    <DOType cdc="ENS" id="Ens_Loop_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="Enum" type="FltLoopKind"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+    </DOType>
+    <DOType cdc="ENS" id="Ens_Recl_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="Enum" type="AutoRecStKind"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+    </DOType>
+    <DOType cdc="INC" id="Inc_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="INT32"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+      <DA name="ctlModel" fc="CF" bType="Enum" type="CtlModelKind" valKind="RO"><Val>status-only</Val></DA>
+    </DOType>
+    <DOType cdc="INC" id="IncEx_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="INT32"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+      <DA name="ctlModel" fc="CF" bType="Enum" type="CtlModelKind" valKind="RO"><Val>status-only</Val></DA>
+      <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>MTseries:2015A</Val></DA>
+    </DOType>
+    <DOType cdc="ING" id="IngEx_MT_1">
+      <DA name="setVal" fc="SE" bType="INT32"/>
+      <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>MTseries:2015A</Val></DA>
+    </DOType>
+    <DOType cdc="INS" id="Ins_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="INT32"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+    </DOType>
+    <DOType cdc="LPL" id="Lpl_MT_1">
+      <DA name="vendor" fc="DC" bType="VisString255" valKind="RO"><Val>Mechanotronika</Val></DA>
+      <DA name="swRev" fc="DC" bType="VisString255" valKind="RO"/>
+    </DOType>
+    <DOType cdc="MV" id="Mv_MT_1">
+      <DA name="mag" fc="MX" dchg="true" bType="Struct" type="AnVal_MT"/>
+      <DA name="q" fc="MX" qchg="true" bType="Quality"/>
+      <DA name="t" fc="MX" bType="Timestamp"/>
+      <DA name="db" fc="CF" bType="INT32U"><Val>0</Val></DA>
+    </DOType>
+    <DOType cdc="MV" id="Mv_MT_2">
+      <DA name="mag" fc="MX" dchg="true" bType="Struct" type="AnVal_MT"/>
+      <DA name="q" fc="MX" qchg="true" bType="Quality"/>
+      <DA name="t" fc="MX" bType="Timestamp"/>
+      <DA name="db" fc="CF" bType="INT32U"><Val>3000</Val></DA>
+      <DA name="zeroDb" fc="CF" bType="INT32U"><Val>100</Val></DA>
+    </DOType>
+    <DOType cdc="SEQ" id="Seq_MT_1">
+      <DA name="seqT" fc="MX" bType="Enum" type="SequenceKind"><Val>pos-neg-zero</Val></DA>
+      <SDO name="c1" type="Cmv_MT_1" desc="pos"/>
+      <SDO name="c2" type="Cmv_MT_1" desc="neg"/>
+      <SDO name="c3" type="Cmv_MT_1" desc="zero"/>
+    </DOType>
+    <DOType cdc="SPC" id="Spc_Stat_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="BOOLEAN"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+      <DA name="ctlModel" fc="CF" bType="Enum" type="CtlModelKind" valKind="RO"><Val>status-only</Val></DA>
+    </DOType>
+    <DOType cdc="SPC" id="Spc_MT_2">
+      <DA name="ctlModel" fc="CF" bType="Enum" type="CtlModelKind" valKind="RO"><Val>direct-with-normal-security</Val></DA>
+      <DA name="sboClass" fc="CF" bType="Enum" type="SboClassKind" valKind="RO"><Val>operate-once</Val></DA>
+      <DA name="sboTimeout" fc="CF" bType="INT32U" valKind="RO"><Val>1000</Val></DA>
+      <DA name="SBO" fc="CO" bType="VisString129"/>
+      <DA name="Oper" fc="CO" bType="Struct" type="oper_bool_MT"/>
+      <DA name="Cancel" fc="CO" bType="Struct" type="cancel_bool_MT"/>
+    </DOType>
+    <DOType cdc="SPC" id="SpcEx_MT_2">
+      <DA name="ctlModel" fc="CF" bType="Enum" type="CtlModelKind" valKind="RO"><Val>direct-with-normal-security</Val></DA>
+      <DA name="sboClass" fc="CF" bType="Enum" type="SboClassKind" valKind="RO"><Val>operate-once</Val></DA>
+      <DA name="sboTimeout" fc="CF" bType="INT32U" valKind="RO"><Val>1000</Val></DA>
+      <DA name="SBO" fc="CO" bType="VisString129"/>
+      <DA name="Oper" fc="CO" bType="Struct" type="oper_bool_MT"/>
+      <DA name="Cancel" fc="CO" bType="Struct" type="cancel_bool_MT"/>
+      <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>MTseries:2015A</Val></DA>
+    </DOType>
+    <DOType cdc="SPG" id="SpgEx_MT_1">
+      <DA name="setVal" fc="SE" bType="BOOLEAN"/>
+      <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>MTseries:2015A</Val></DA>
+    </DOType>
+    <DOType cdc="SPS" id="Sps_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="BOOLEAN"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+	  <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>IEC 61850-7-4:2007A</Val></DA>
+    </DOType>
+    <DOType cdc="SPS" id="SpsEx_MT_1">
+      <DA name="stVal" fc="ST" dchg="true" bType="BOOLEAN"/>
+      <DA name="q" fc="ST" qchg="true" bType="Quality"/>
+      <DA name="t" fc="ST" bType="Timestamp"/>
+      <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>MTseries:2015A</Val></DA>
+    </DOType>
+	<DOType cdc="DPS" id="DpsEx_MT_1">
+		<DA name="stVal" fc="ST" dchg="true" bType="Dbpos"/>
+		<DA name="q" fc="ST" qchg="true" bType="Quality"/>
+		<DA name="t" fc="ST" bType="Timestamp"/>
+		<DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>MTseries:2015A</Val></DA>
+	</DOType>	
+    <DOType cdc="WYE" id="Wye_MT_1">
+      <SDO name="phsA" type="Cmv_MT_1"/>
+      <SDO name="phsB" type="Cmv_MT_1"/>
+      <SDO name="phsC" type="Cmv_MT_1"/>
+      <DA name="angRef" fc="CF" dchg="true" bType="Enum" type="PhaseAngleReferenceKind" valKind="RO"><Val>Aother</Val></DA>
+    </DOType>
+	<DOType cdc="WYE" id="Wye_MT_2">
+      <SDO name="phsA" type="Cmv_MT_1"/>
+      <SDO name="phsB" type="Cmv_MT_1"/>
+      <SDO name="phsC" type="Cmv_MT_1"/>
+      <SDO name="res" type="Cmv_MT_1"/>
+      <DA name="angRef" fc="CF" dchg="true" bType="Enum" type="PhaseAngleReferenceKind" valKind="RO"><Val>Aother</Val></DA>
+    </DOType>
+    <DOType cdc="WYE" id="Wye_MT_3">
+      <SDO name="res" type="Cmv_MT_1"/>
+      <DA name="angRef" fc="CF" dchg="true" bType="Enum" type="PhaseAngleReferenceKind" valKind="RO"><Val>Aother</Val></DA>
+    </DOType>
+	
+	<DOType cdc="WYE" id="Wye_MT_4">
+	  <SDO name="phsA" type="Cmv_MT_1"/>
+	  <DA name="angRef" fc="CF" dchg="true" bType="Enum" type="PhaseAngleReferenceKind" valKind="RO"><Val>Aother</Val></DA>
+	  <DA name="dataNs" fc="EX" bType="VisString255" valKind="RO"><Val>IEC 61850-7-4:2007A</Val></DA>
+	</DOType>
+    <!-- DATA ATTRIBUTES  -->
+    <DAType id="cVal_MT">
+      <BDA name="mag" bType="Struct" type="AnVal_MT"/>
+      <BDA name="ang" bType="Struct" type="AnVal_MT"/>
+    </DAType>
+    <DAType id="AnVal_MT">
+      <BDA name="f" bType="FLOAT32"/>
+    </DAType>
+    <DAType id="oper_bool_MT">
+      <BDA bType="BOOLEAN" name="ctlVal"/>
+      <BDA bType="Struct" name="origin" type="originator"/>
+      <BDA bType="INT8U" name="ctlNum"/>
+      <BDA bType="Timestamp" name="T"/>
+      <BDA bType="BOOLEAN" name="Test"/>
+      <BDA bType="Check" name="Check"/>
+      <ProtNs type="8-MMS">IEC 61850-8-1:2003</ProtNs>
+    </DAType>
+    <DAType id="cancel_bool_MT">
+      <BDA bType="BOOLEAN" name="ctlVal"/>
+      <BDA bType="Struct" name="origin" type="originator"/>
+      <BDA bType="INT8U" name="ctlNum"/>
+      <BDA bType="Timestamp" name="T"/>
+      <BDA bType="BOOLEAN" name="Test"/>
+      <ProtNs type="8-MMS">IEC 61850-8-1:2003</ProtNs>
+    </DAType>
+    <DAType id="originator">
+      <BDA bType="Enum" name="orCat" type="OriginatorCategoryKind"/>
+      <BDA bType="Octet64" name="orIdent"/>
+    </DAType>
+    <!-- ENUMERATIONS  -->
+    <EnumType id="AutoRecStKind">
+      <EnumVal ord="1">Ready</EnumVal>
+      <EnumVal ord="2">InProgress</EnumVal>
+      <EnumVal ord="3">Successful</EnumVal>
+      <EnumVal ord="4">WaitingForTrip</EnumVal>
+      <EnumVal ord="5">TripFromProtection</EnumVal>
+      <EnumVal ord="6">FaultDisappeared</EnumVal>
+      <EnumVal ord="7">WaitToComplete</EnumVal>
+      <EnumVal ord="8">CBclosed</EnumVal>
+      <EnumVal ord="9">CycleUnsuccessful</EnumVal>
+      <EnumVal ord="10">Unsuccessful</EnumVal>
+      <EnumVal ord="11">Aborted</EnumVal>
+    </EnumType>
+    <EnumType id="BehKind">
+      <EnumVal ord="1">on</EnumVal>
+      <EnumVal ord="2">blocked</EnumVal>
+      <EnumVal ord="3">test</EnumVal>
+      <EnumVal ord="4">test/blocked</EnumVal>
+      <EnumVal ord="5">off</EnumVal>
+    </EnumType>
+    <EnumType id="CtlModelKind">
+      <EnumVal ord="0">status-only</EnumVal>
+      <EnumVal ord="1">direct-with-normal-security</EnumVal>
+      <EnumVal ord="2">sbo-with-normal-security</EnumVal>
+	  <EnumVal ord="4">sbo-with-enhanced-security</EnumVal>
+    </EnumType>
+    <EnumType id="FaultDirectionKind">
+      <EnumVal ord="0">unknown</EnumVal>
+      <EnumVal ord="1">forward</EnumVal>
+      <EnumVal ord="2">backward</EnumVal>
+      <EnumVal ord="3">both</EnumVal>
+    </EnumType>
+    <EnumType id="FltLoopKind">
+      <EnumVal ord="1">PhaseAtoGround</EnumVal>
+      <EnumVal ord="2">PhaseBtoGround</EnumVal>
+      <EnumVal ord="3">PhaseCtoGround</EnumVal>
+      <EnumVal ord="4">PhaseAtoB</EnumVal>
+      <EnumVal ord="5">PhaseBtoC</EnumVal>
+      <EnumVal ord="6">PhaseCtoA</EnumVal>
+      <EnumVal ord="7">Others</EnumVal>
+    </EnumType>
+    <EnumType id="HealthKind">
+      <EnumVal ord="1">Ok</EnumVal>
+      <EnumVal ord="2">Warning</EnumVal>
+      <EnumVal ord="3">Alarm</EnumVal>
+    </EnumType>
+    <EnumType id="PhaseAngleReferenceKind">
+      <EnumVal ord="10">Aother</EnumVal>
+    </EnumType>
+    <EnumType id="SboClassKind">
+      <EnumVal ord="0">operate-once</EnumVal>
+    </EnumType>
+    <EnumType id="SequenceKind">
+      <EnumVal ord="0">pos-neg-zero</EnumVal>
+    </EnumType>
+    <EnumType id="OriginatorCategoryKind">
+      <EnumVal ord="0">not-supported</EnumVal>
+      <EnumVal ord="1">bay-control</EnumVal>
+      <EnumVal ord="2">station-control</EnumVal>
+      <EnumVal ord="3">remote-control</EnumVal>
+      <EnumVal ord="4">automatic-bay</EnumVal>
+      <EnumVal ord="5">automatic-station</EnumVal>
+      <EnumVal ord="6">automatic-remote</EnumVal>
+      <EnumVal ord="7">maintenance</EnumVal>
+      <EnumVal ord="8">process</EnumVal>
+    </EnumType>
+</DataTypeTemplates>
+</SCL>
