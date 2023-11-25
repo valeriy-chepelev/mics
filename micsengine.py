@@ -4,6 +4,9 @@ Main data processing unit for the MICS project
 LGPL licensing
 """
 
+from natsort import natsort_keygen
+
+# Dictionaries definition
 _lnGroup = {'A': 'Automatic control',
             'B': 'Unknown',
             'C': 'Supervisory Control',
@@ -40,3 +43,22 @@ _cdcOrder = {'Status': 20,
              'Control': 40,
              'Setting': 50,
              'Description': 10}
+
+# Namespaces and maps definition
+ns = {'61850': 'http://www.iec.ch/61850/2003/SCL',
+      'NSD': 'http://www.iec.ch/61850/2016/NSD'}
+
+nsURI = '{%s}' % (ns['61850'])
+nsMap = {None: ns['61850']}
+
+ns_dURI = '{%s}' % (ns['NSD'])
+ns_dMap = {None: ns['NSD']}
+
+
+def list_ld(icd):
+    """Yields LD's info from icd object.
+    Return tuple (inst, ldName, desc)"""
+    lds = [(ld.get('inst'), ld.get('ldName'), ld.get('desc'))
+           for ld in icd.findall('.//61850:LDevice', ns)]
+    for t in sorted(lds, key=natsort_keygen(key=lambda tup: tup[0].lower())):
+        yield t[0], '' if t[1] is None else t[1], '' if t[2] is None else t[2]

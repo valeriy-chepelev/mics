@@ -208,7 +208,10 @@
 				</GooseReceive>
 			</Private>
         <Authentication none="true"/>
-        <LDevice inst="LD0">
+		<LDevice inst="LD1" ldName="Name" desc="description"/>	<!-- this is test record for LD -->
+        <LDevice inst="LD9"/>
+		<LDevice inst="LD10"/>
+		<LDevice inst="LD0">
           <LN0 desc="General" inst="" lnType="LLN0_MT_A" lnClass="LLN0">
             <DataSet name="stDS" desc="Device info">
               <FCDA ldInst="LD0" lnClass="LPHD" fc="DC" lnInst="1" prefix="" doName="PhyNam"/>
