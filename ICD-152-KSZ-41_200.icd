@@ -209,8 +209,16 @@
 			</Private>
         <Authentication none="true"/>
 		<LDevice inst="LD1" ldName="Name" desc="description"/>	<!-- this is test record for LD -->
-        <LDevice inst="LD9"/>
-		<LDevice inst="LD10"/>
+		<LDevice inst="LD9">
+			<LN desc="TT" inst="1" lnType="TCTR_MT_2" lnClass="TCTR" prefix="A_"/>
+          <LN desc="TT" inst="11" lnType="TCTR_MT_2" lnClass="TCTR" prefix="A_"/>
+          <LN desc="TT" inst="2" lnType="TCTR_MT_2" lnClass="TCTR" prefix="A_"/>
+		</LDevice>
+		<LDevice inst="LD10">
+			<LN desc="TS" inst="1" lnType="TCTR_MT_2" lnClass="TCTR" prefix="A_"/>
+          <LN desc="TS" inst="11" lnType="TCTR_MT_2" lnClass="TCTR" prefix="A_"/>
+          <LN desc="TS" inst="2" lnType="TCTR_MT_2" lnClass="TCTR" prefix="A_"/>
+		</LDevice>
 		<LDevice inst="LD0">
           <LN0 desc="General" inst="" lnType="LLN0_MT_A" lnClass="LLN0">
             <DataSet name="stDS" desc="Device info">

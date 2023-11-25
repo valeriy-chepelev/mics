@@ -73,22 +73,22 @@ def _ln_name(ln):
 
 def list_ln(icd, ldinst=''):
     """Yields LN's common info from icd object.
-    Return tuple (prefix+class+instance, desc)
-    Sorts by LN Class, leading system LN's.
-    If 'ldinst' omitted, return data from all LDs, primarily sorted."""
+    Return tuple (prefix+class+instance, class group, description)
+    Sorts by: LD instance, class group, full name.
+    If 'ldinst' omitted, return data from all LDs."""
     ld_request = './/' if ldinst == '' \
         else f'.//61850:LDevice[@inst="{ldinst}"]/'
     # find LN0 first
-    lns = [(ln.getparent().get('inst'),
-            _ln_name(ln),
-            ln.get('desc'),
-            ln.get('lnClass')[0])
+    lns = [(ln.getparent().get('inst'),  # 0- LD name
+            _ln_name(ln),  # 1- Full LN name
+            ln.get('desc'),  # 2- Description
+            ln.get('lnClass'))  # 3- Class name
            for ln in icd.findall(f'{ld_request}61850:LN0', ns)]
     # extend with LNs
     lns.extend([(ln.getparent().get('inst'),
                  _ln_name(ln),
                  ln.get('desc'),
-                 ln.get('lnClass')[0])
+                 ln.get('lnClass'))
                 for ln in icd.findall(f'{ld_request}61850:LN', ns)])
-    for t in lns:  # TODO: sort - sorted(list, key=lambda x: (x[0], -x[1]))
-        yield t  # TODO: out formatting
+    for t in sorted(lns, key=natsort_keygen(key=lambda tup: tup[0] + '/' + tup[3] + '/' + tup[1])):
+        yield t[1], _lnGroup[t[3][0]], '' if (s := t[2]) is None else s
