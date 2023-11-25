@@ -4,7 +4,7 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 import lxml.etree as xml_tree
-from micsengine import list_ld
+from micsengine import list_ld, list_ln
 
 
 def test_list_ld():
@@ -12,6 +12,13 @@ def test_list_ld():
     icd_root = icd_tree.getroot()
     for ld in list_ld(icd_root):
         print(ld)
+
+
+def test_list_ln():
+    icd_tree = xml_tree.parse('ICD-152-KSZ-41_200.icd')
+    icd_root = icd_tree.getroot()
+    for ln in list_ln(icd_root):
+        print(ln)
 
 
 def print_hi(name):
@@ -22,5 +29,6 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     test_list_ld()
+    test_list_ln()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

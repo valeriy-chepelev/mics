@@ -62,3 +62,33 @@ def list_ld(icd):
            for ld in icd.findall('.//61850:LDevice', ns)]
     for t in sorted(lds, key=natsort_keygen(key=lambda tup: tup[0].lower())):
         yield t[0], '' if t[1] is None else t[1], '' if t[2] is None else t[2]
+
+
+def _ln_name(ln):
+    t = ['' if (p := ln.get('prefix')) is None else p,
+         ln.get('lnClass'),
+         '' if (i := ln.get('inst')) is None else i]
+    return ''.join(t)
+
+
+def list_ln(icd, ldinst=''):
+    """Yields LN's common info from icd object.
+    Return tuple (prefix+class+instance, desc)
+    Sorts by LN Class, leading system LN's.
+    If 'ldinst' omitted, return data from all LDs, primarily sorted."""
+    ld_request = './/' if ldinst == '' \
+        else f'.//61850:LDevice[@inst="{ldinst}"]/'
+    # find LN0 first
+    lns = [(ln.getparent().get('inst'),
+            _ln_name(ln),
+            ln.get('desc'),
+            ln.get('lnClass')[0])
+           for ln in icd.findall(f'{ld_request}61850:LN0', ns)]
+    # extend with LNs
+    lns.extend([(ln.getparent().get('inst'),
+                 _ln_name(ln),
+                 ln.get('desc'),
+                 ln.get('lnClass')[0])
+                for ln in icd.findall(f'{ld_request}61850:LN', ns)])
+    for t in lns:  # TODO: sort - sorted(list, key=lambda x: (x[0], -x[1]))
+        yield t  # TODO: out formatting
