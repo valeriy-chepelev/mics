@@ -5,6 +5,7 @@ LGPL licensing
 """
 
 from natsort import natsort_keygen
+from string import digits
 
 # Dictionaries definition
 _lnGroup = {'A': 'Automatic control',
@@ -92,3 +93,26 @@ def list_ln(icd, ldinst=''):
                 for ln in icd.findall(f'{ld_request}61850:LN', ns)])
     for t in sorted(lns, key=natsort_keygen(key=lambda tup: tup[0] + '/' + tup[3] + '/' + tup[1])):
         yield t[1], _lnGroup[t[3][0]], '' if (s := t[2]) is None else s
+
+
+def _get_nsd_do(nsd, ln_class: str, do_name: str):
+    """" Return NSD DataObject (lxml element) referenced by ln_class and some do_name.
+    Control's the 'multi' condition for the do_name trailed with digits.
+    Return None if ln_class or data object not in NSD.
+    nsd should be lxml root."""
+    d = None
+    ln = nsd.find(f'.//NSD:LNClass[@name="{ln_class}"]', ns)
+    if ln is None:
+        ln = nsd.find(f'.//NSD:AbstractLNClass[@name="{ln_class}"]', ns)
+    # Here ln should be found otherwise return None
+    if ln is not None:
+        d = ln.find(f'./NSD:DataObject[@name="{do_name}"]', ns)
+        if d is None and do_name[-1] in digits:
+            # Try to find as 'multy'
+            d = ln.find(f'./NSD:DataObject[@name="{do_name.rstrip(digits)}"]', ns)
+            if d is not None and 'multi' not in d.get('presCond'):
+                d = None  # This do should be 'multi'
+        if d is None and 'base' in ln.attrib:
+            # Lookup in parents iteratively
+            d = _get_nsd_do(nsd, ln.get('base'), do_name)
+    return d
