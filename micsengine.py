@@ -39,11 +39,11 @@ _cdcUsage = {'Status': ["SPS", "DPS", "INS", "ENS", "ACT", "ACD", "SEC", "BCR", 
              'Control': ["SPC", "DPC", "INC", "ENC", "BSC", "ISC", "APC", "BAC"],
              'Setting': ["SPG", "ING", "ENG", "ORG", "TSG", "CUG", "VSG", "ASG", "CURVE", "CSG"],
              'Description': ["DPL", "LPL", "CSD"]}
-_cdcOrder = {'Status': 20,
-             'Measurement': 30,
-             'Control': 40,
-             'Setting': 50,
-             'Description': 10}
+_cdcOrder = {'Status': 'B',
+             'Measurement': 'C',
+             'Control': 'D',
+             'Setting': 'E',
+             'Description': 'A'}
 
 # Namespaces and maps definition
 ns = {'61850': 'http://www.iec.ch/61850/2003/SCL',
@@ -96,7 +96,7 @@ def list_ln(icd, ldinst=''):
 
 
 def _get_nsd_do(nsd, ln_class: str, do_name: str):
-    """" Return NSD DataObject (lxml element) referenced by ln_class and some do_name.
+    """ Return NSD DataObject (lxml element) referenced by ln_class and some do_name.
     Control's the 'multi' condition for the do_name trailed with digits.
     Return None if ln_class or data object not in NSD.
     nsd should be lxml root."""
@@ -116,3 +116,16 @@ def _get_nsd_do(nsd, ln_class: str, do_name: str):
             # Lookup in parents iteratively
             d = _get_nsd_do(nsd, ln.get('base'), do_name)
     return d
+
+
+def list_do(icd, ln, nsd):
+    """"Yields data objects of ln,
+    return tuple (doName, cdc, conditions, cdc_usage)"""
+    dobs = [(name := dob.get('name'),
+             cdc := f.get('cdc') if (f := icd.find(f'.//61850:DOType[@id="{dob.get("type")}"]',
+                                                   ns)) is not None else '',
+             d.get('presCond')[0] if (d := _get_nsd_do(nsd, ln.get('lnClass'), name)) is not None else 'E',
+             next((key for key, vals in _cdcUsage.items() if cdc in vals), ''))
+            for dob in icd.findall(f'.//61850:LNodeType[@id="{ln.get("lnType")}"]/61850:DO', ns)]
+    for d in sorted(dobs, key=natsort_keygen(key=lambda tup: _cdcOrder[tup[3]] + '/' + tup[1])):
+        yield d

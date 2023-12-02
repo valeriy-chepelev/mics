@@ -4,7 +4,7 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 import lxml.etree as xml_tree
-from micsengine import list_ld, list_ln, _get_nsd_do
+from micsengine import list_ld, list_ln, _get_nsd_do, list_do, ns
 
 
 def test_list_ld():
@@ -26,6 +26,19 @@ def test_do_scan():
     nsd_root = nsd.getroot()
     print(_get_nsd_do(nsd_root, 'PDIS', 'Beh1').get('presCond'))
 
+
+def test_list_do():
+    icd_tree = xml_tree.parse('ICD-152-KSZ-41_200.icd')
+    icd_root = icd_tree.getroot()
+    nsd_tree = xml_tree.parse('IEC_61850-7-4_2007B.nsd')
+    nsd_root = nsd_tree.getroot()
+    for ln in icd_root.findall('.//61850:LN', ns):
+        print('==============================')
+        print(ln.get('lnType'))
+        for d in list_do(icd_root, ln, nsd_root):
+            print(d)
+    pass
+
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
@@ -33,6 +46,6 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    test_do_scan()
+    test_list_ln()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
