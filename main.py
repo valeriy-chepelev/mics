@@ -32,10 +32,10 @@ def test_list_do():
     icd_root = icd_tree.getroot()
     nsd_tree = xml_tree.parse('IEC_61850-7-4_2007B.nsd')
     nsd_root = nsd_tree.getroot()
-    for ln in icd_root.findall('.//61850:LN', ns):
+    for ln in list_ln(icd_root):
         print('==============================')
-        print(ln.get('lnType'))
-        for d in list_do(icd_root, ln, nsd_root):
+        print(ln)
+        for d in list_do(icd_root, ln[3], ln[4], nsd_root):
             print(d)
     pass
 
@@ -46,6 +46,6 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    test_list_ln()
+    test_list_do()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
