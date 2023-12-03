@@ -4,8 +4,8 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 import lxml.etree as xml_tree
-from micsengine import list_ld, list_ln, _get_nsd_do, list_do, ns
-
+from micsengine import list_ld, list_ln, _get_nsd_do, list_do, get_associations
+from ass_reader import read_data
 
 def test_list_ld():
     icd_tree = xml_tree.parse('ICD-152-KSZ-41_200.icd')
@@ -39,6 +39,11 @@ def test_list_do():
             print(d)
     pass
 
+
+def test_ass_reader():
+    s = get_associations(read_data('foo'), 'LD0/Seq_MSQI1/SeqV')
+    print(s)
+
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
@@ -46,6 +51,6 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    test_list_do()
+    test_ass_reader()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
