@@ -1,14 +1,22 @@
 """"
-XLS data reader unit for the MICS project
+Associations data reader unit for the MICS project
 (c) Valeriy Chepelev
 LGPL licensing
 """
 
 
 def read_data(filename: str) -> dict:
-    """Read assotiation data from a file,
+    """Read association data from a file,
     return dictionary DA-name: signal name"""
-    return _test_data
+    with open(filename, encoding='utf-16') as f:
+        head = f.readline()
+        assert (h := head.split('\t'))[1] == 'Описание' and h[2] == 'Тип' and h[3] == 'Ассоциация\n'
+        data = dict()
+        for line in f:
+            d = [s.strip(' \n') for s in line.split('\t')]
+            if d[3] != '' and not (d[3].startswith('_') or d[3].startswith('850_')):
+                data[d[0]] = d[3]
+    return data
 
 
 _test_data = {"LD0/AB_TVTR1/Beh/q": "",

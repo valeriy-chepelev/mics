@@ -135,12 +135,10 @@ def list_do(icd, ln_class: str, ln_type: str, nsd):
         yield d
 
 
-def get_associations(iec_data: dict, do_name: str) -> str:
-    """Return assotiations, comma-separated from iec_data,
+def get_associations(data: dict, do_name: str) -> str:
+    """Return associations, comma-separated from iec_data,
     according to full data object name.
     do_name should be in format: LDinst/prefPTOC1/Str"""
-    d = {val for key, val in iec_data.items() if
-         key.startswith(do_name)
-         and val != ''
-         and not val.startswith('850_')}
+    d = {val for key, val in data.items() if
+         key.startswith(do_name)}
     return '; '.join(sorted(d, key=natsort_keygen()))
