@@ -1,3 +1,4 @@
+import argparse
 import lxml.etree as xml_tree
 from micsengine import list_ld, list_ln, list_do, get_associations
 from associations_reader import read_data
@@ -29,4 +30,8 @@ def test_tab_gener():
 
 
 if __name__ == '__main__':
-    test_tab_gener()
+    parser = argparse.ArgumentParser(description='MICS generator by VCh.')
+    parser.add_argument('-d', '--debug', action='store_true', help='execute debugging functions')
+    args = parser.parse_args()
+    if args.debug:
+        test_tab_gener()
