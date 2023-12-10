@@ -61,7 +61,8 @@ def table_gener(icd, nsd, iec_data):
     for ln in list_ln(icd):
         print(f'LOGICAL NODE "{ln[0]}":{ln[3]} ({ln[2]})')
         for do in list_do(icd, ln[3], ln[4], nsd):
-            print(f'{do[3]} data object "{do[0]}" ({do[1]}) [{do[2]}]: {do[4]}')
+            print(f'{do[3]} data object "{do[0]}" ({do[1]}) [{do[2]}]: "{do[4]}"', end='')
+            print(f', associated to "{get_associations(iec_data, "/".join([ln[0],do[0]]))}"')
 
 
 def test_tab_gener():

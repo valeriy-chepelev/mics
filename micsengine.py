@@ -74,7 +74,7 @@ def _ln_name(ln):
 
 def list_ln(icd, ldinst=''):
     """Yields LN's common info from icd object.
-    Return tuple (prefix+class+instance, class group, description, class, type)
+    Return tuple (ldinst/prefix+class+instance, class group, description, class, type)
     Sorts by: LD instance, class group, full name.
     If 'ldinst' omitted, return data from all LDs."""
     ld_request = './/' if ldinst == '' \
@@ -94,7 +94,7 @@ def list_ln(icd, ldinst=''):
                  ln.get('lnType'))
                 for ln in icd.findall(f'{ld_request}61850:LN', ns)])
     for t in sorted(lns, key=natsort_keygen(key=lambda tup: tup[0] + '/' + tup[3] + '/' + tup[1])):
-        yield t[1], _lnGroup[t[3][0]], '' if (s := t[2]) is None else s, t[3], t[4]
+        yield '/'.join([t[0],t[1]]), _lnGroup[t[3][0]], '' if (s := t[2]) is None else s, t[3], t[4]
 
 
 def _get_nsd_do(nsd, ln_class: str, do_name: str):
