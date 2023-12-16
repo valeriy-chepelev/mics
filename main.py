@@ -2,6 +2,7 @@ import argparse
 import lxml.etree as xml_tree
 from micsengine import list_ld, list_ln, list_do, get_associations
 from associations_reader import read_data
+from reporter import report
 
 
 def table_gener(icd, nsd, iec_data):
@@ -29,9 +30,13 @@ def test_tab_gener():
     table_gener(icd_root, nsd_root, iec_data)
 
 
+def test_report():
+    report('MICS_template.docx')
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='MICS generator by VCh.')
     parser.add_argument('-d', '--debug', action='store_true', help='execute debugging functions')
     args = parser.parse_args()
     if args.debug:
-        test_tab_gener()
+        test_report()
