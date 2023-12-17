@@ -1,6 +1,6 @@
 import argparse
 import lxml.etree as xml_tree
-from micsengine import list_ld, list_ln, list_do, get_associations
+from micsengine import list_ld, list_ln, list_do, get_associations, list_class_groups
 from associations_reader import read_data
 from reporter import report
 
@@ -16,7 +16,7 @@ def table_gener(icd, nsd, iec_data):
     print('=== NODES AND DATA ===')
     for ln in list_ln(icd):
         print(f'LOGICAL NODE "{ln[0]}":{ln[3]} ({ln[2]})')
-        for do in list_do(icd, ln[3], ln[4], nsd):
+        for do in list_do(icd, ln[4], nsd):
             print(f'{do[3]} data object "{do[0]}" ({do[1]}) [{do[2]}]: "{do[4]}"', end='')
             print(f', associated to "{get_associations(iec_data, "/".join([ln[0], do[0]]))}"')
 
@@ -34,9 +34,17 @@ def test_report():
     report('MICS_template.docx')
 
 
+def test_list_ln():
+    icd_tree = xml_tree.parse('ICD-152-KSZ-41_200.icd')
+    icd_root = icd_tree.getroot()
+    for c in list_ln(icd_root, classgroup='L'):
+        print(c)
+
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='MICS generator by VCh.')
     parser.add_argument('-d', '--debug', action='store_true', help='execute debugging functions')
     args = parser.parse_args()
     if args.debug:
-        test_report()
+        test_list_ln()
