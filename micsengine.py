@@ -59,12 +59,12 @@ ns_dMap = {None: ns['NSD']}
 def list_ld(icd):
     """Yields LD's info from icd object.
     Return dictionary {inst, ldName, desc}"""
-    lds = [(ld.get('inst'), ld.get('ldName'), ld.get('desc'))
+    lds = [{'inst': ld.get('inst'),
+            'ldName': ld.get('ldName'),
+            'desc': ld.get('desc')}
            for ld in icd.findall('.//61850:LDevice', ns)]
-    for t in sorted(lds, key=natsort_keygen(key=lambda tup: tup[0].lower())):
-        yield {'inst': t[0],
-               'ldName': '' if t[1] is None else t[1],
-               'desc': '' if t[2] is None else t[2]}
+    for t in sorted(lds, key=natsort_keygen(key=lambda x: x['inst'])):
+        yield t
 
 
 def _ln_name(ln):
@@ -82,44 +82,37 @@ def list_class_groups(icd, ldinst=''):
     ld_request = './/' if ldinst == '' \
         else f'.//61850:LDevice[@inst="{ldinst}"]/'
     letters = {ln.get('lnClass')[0] for ln in icd.findall(f'{ld_request}61850:LN', ns)}
-    letters.add('L')
+    letters.add('L')  # system LLN0 (L) is mandatory in any LD - no check
     for letter in sorted(list(letters)):
         yield {'class_group': letter,
                'class_desc': _lnGroup[letter]}
 
 
+def _ln_dict(ln):
+    return dict(ldInst=ln.getparent().get('inst'),
+                name=_ln_name(ln),
+                desc='' if ln.get('desc') is None else ln.get('desc'),
+                lnClass=ln.get('lnClass'),
+                lnType=ln.get('lnType'))
+
+
 def list_ln(icd, ldinst='', classgroup=''):
     """Yields LN's common info from icd object.
-    Return dictionary {ldInst, name=prefix+class+instance, desc, class, type}
+    Return dictionary {ldInst, name=prefix+class+instance, desc, lnClass, lnType}
     Sorts by: LD instance, class group, full name.
     If 'ldinst' omitted, return data from all LDs."""
     ld_request = './/' if ldinst == '' \
         else f'.//61850:LDevice[@inst="{ldinst}"]/'
     # find LN0 first
     if classgroup in ['', 'L']:
-        lns = [(ln.getparent().get('inst'),  # 0- LD instance
-                _ln_name(ln),  # 1- Full LN name
-                ln.get('desc'),  # 2- Description
-                ln.get('lnClass'),  # 3- Class name
-                ln.get('lnType'))  # 4- LN type
-               for ln in icd.findall(f'{ld_request}61850:LN0', ns)]
+        lns = [_ln_dict(ln) for ln in icd.findall(f'{ld_request}61850:LN0', ns)]
     else:
         lns = list()
     # extend with LNs
-    lns.extend([(ln.getparent().get('inst'),
-                 _ln_name(ln),
-                 ln.get('desc'),
-                 ln.get('lnClass'),
-                 ln.get('lnType'))
-                for ln in icd.findall(f'{ld_request}61850:LN', ns)
-                if classgroup == '' or ln.get('lnClass')[0] == classgroup
-                ])
-    for t in sorted(lns, key=natsort_keygen(key=lambda tup: tup[0] + '/' + tup[3] + '/' + tup[1])):
-        yield {'ldInst': t[0],
-               'name': t[1],
-               'class': t[3],
-               'type': t[4],
-               'desc': '' if t[2] is None else t[2]}
+    lns.extend([_ln_dict(ln) for ln in icd.findall(f'{ld_request}61850:LN', ns)
+                if classgroup == '' or ln.get('lnClass')[0] == classgroup])
+    for t in sorted(lns, key=natsort_keygen(key=lambda x: x['ldInst'] + '/' + x['lnClass'] + '/' + x['name'])):
+        yield t
 
 
 def _get_nsd_do(nsd, ln_class: str, do_name: str):
@@ -145,24 +138,36 @@ def _get_nsd_do(nsd, ln_class: str, do_name: str):
     return d
 
 
-# TODO: get list of cdcUsages within ln
-# TODO: convert list_do to get dictionary, filtered by cdcUsages
+def list_ln_cdc(icd, ln_type: str):
+    """ Yields sorted list of ln's cdc usages.
+    icd should be a lxml root"""
+    ln_type_obj = icd.find(f'.//61850:LNodeType[@id="{ln_type}"]', ns)
+    assert ln_type_obj is not None
+    cdc_set = {f.get('cdc') for dob in ln_type_obj.findall('61850:DO', ns)
+               if (f := icd.find(f'.//61850:DOType[@id="{dob.get("type")}"]', ns)) is not None}
+    usages = {next((key for key, values in _cdcUsage.items() if cdc in values), '')
+              for cdc in cdc_set}
+    for d in sorted(list(usages), key=lambda x: _cdcOrder[x]):
+        yield d
 
-def list_do(icd, ln_type: str, nsd):
+
+def list_do(icd, ln_type: str, nsd, usage='Status'):
     """ Yields data objects of ln,
-    return sorted tuple (doName, cdc, conditions, cdc_usage, description).
+    return sorted list of dict {name, cdc, presCond, desc}.
     icd and nsd should be lxml root."""
     ln_type_obj = icd.find(f'.//61850:LNodeType[@id="{ln_type}"]', ns)
     assert ln_type_obj is not None
-    dobs = [(name := dob.get('name'),
-             cdc := f.get('cdc') if (f := icd.find(f'.//61850:DOType[@id="{dob.get("type")}"]',
-                                                   ns)) is not None else '',
-             d.get('presCond')[0] if (d := _get_nsd_do(nsd, ln_type_obj.get('lnClass'), name)) \
-                                     is not None else 'E',
-             next((key for key, vals in _cdcUsage.items() if cdc in vals), ''),
-             desc if (desc := dob.get('desc')) is not None else '')
-            for dob in ln_type_obj.findall('61850:DO', ns)]
-    for d in sorted(dobs, key=natsort_keygen(key=lambda tup: _cdcOrder[tup[3]] + '/' + tup[1])):
+    cdc = ''  # compiler warning suppress
+    dobs = [{'name': (name := dob.get('name')),
+             'cdc': cdc,
+             'presCond': 'E' if (d := _get_nsd_do(nsd, ln_type_obj.get('lnClass'), name)) is None
+             else d.get('presCond')[0],
+             'desc': '' if dob.get('desc') is None else dob.get('desc')}
+            for dob in ln_type_obj.findall('61850:DO', ns)
+            if ((f := icd.find(f'.//61850:DOType[@id="{dob.get("type")}"]', ns)) is not None)
+            and (cdc := f.get('cdc')) in _cdcUsage[usage]
+            ]
+    for d in sorted(dobs, key=natsort_keygen(key=lambda x: x['name'])):
         yield d
 
 
@@ -171,5 +176,5 @@ def get_associations(data: dict, do_name: str) -> str:
     according to full data object name.
     do_name should be in format: LDinst/prefPTOC1/Str"""
     d = {val for key, val in data.items() if
-         key.startswith(do_name)}
+         set(do_name.split('/')).issubset(key.split('/'))}
     return '; '.join(sorted(d, key=natsort_keygen()))

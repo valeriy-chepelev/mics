@@ -1,6 +1,6 @@
 import argparse
 import lxml.etree as xml_tree
-from micsengine import list_ld, list_ln, list_do, get_associations, list_class_groups
+from micsengine import list_ld, list_ln, list_do, get_associations, list_class_groups, list_ln_cdc
 from associations_reader import read_data
 from reporter import report
 
@@ -8,17 +8,17 @@ from reporter import report
 def table_gener(icd, nsd, iec_data):
     """Creates all the required mics tables.
     """
-    print('=== DEVICES AND NODES ===')
     for ld in list_ld(icd):
-        print(f'LOGICAL DEVICE instance "{ld[0]}"')
-        for ln in list_ln(icd, ld[0]):
-            print(f'{ln[1]} Logical Node "{ln[0]}":{ln[3]} ({ln[2]})')
-    print('=== NODES AND DATA ===')
-    for ln in list_ln(icd):
-        print(f'LOGICAL NODE "{ln[0]}":{ln[3]} ({ln[2]})')
-        for do in list_do(icd, ln[4], nsd):
-            print(f'{do[3]} data object "{do[0]}" ({do[1]}) [{do[2]}]: "{do[4]}"', end='')
-            print(f', associated to "{get_associations(iec_data, "/".join([ln[0], do[0]]))}"')
+        print(f'LOGICAL DEVICE {ld}')
+        for ln_group in list_class_groups(icd, ld['inst']):
+            print(f'GROUP {ln_group["class_group"]} - {ln_group["class_desc"]}')
+            for ln in list_ln(icd, ld['inst'], ln_group["class_group"]):
+                print(f'LN {ln}')
+                for cdc in list_ln_cdc(icd, ln['lnType']):
+                    print(f'- {cdc} data objects:')
+                    for dob in list_do(icd, ln['lnType'], nsd, cdc):
+                        full_do_name = "/".join([ln['ldInst'], ln['name'], dob['name']])
+                        print(f'  {dob} -> {get_associations(iec_data, full_do_name)}')
 
 
 def test_tab_gener():
@@ -41,10 +41,9 @@ def test_list_ln():
         print(c)
 
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='MICS generator by VCh.')
     parser.add_argument('-d', '--debug', action='store_true', help='execute debugging functions')
     args = parser.parse_args()
     if args.debug:
-        test_list_ln()
+        test_tab_gener()
