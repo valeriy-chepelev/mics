@@ -60,8 +60,8 @@ def list_ld(icd):
     """Yields LD's info from icd object.
     Return dictionary {inst, ldName, desc}"""
     lds = [{'inst': ld.get('inst'),
-            'ldName': ld.get('ldName'),
-            'desc': ld.get('desc')}
+            'ldName': '' if ld.get('ldName') is None else ld.get('ldName'),
+            'desc': '' if ld.get('desc') is None else ld.get('desc')}
            for ld in icd.findall('.//61850:LDevice', ns)]
     for t in sorted(lds, key=natsort_keygen(key=lambda x: x['inst'])):
         yield t
@@ -160,8 +160,8 @@ def list_do(icd, ln_type: str, nsd, usage='Status'):
     cdc = ''  # compiler warning suppress
     dobs = [{'name': (name := dob.get('name')),
              'cdc': cdc,
-             'presCond': 'E' if (d := _get_nsd_do(nsd, ln_type_obj.get('lnClass'), name)) is None
-             else d.get('presCond')[0],
+             'presCond': ('E' if (d := _get_nsd_do(nsd, ln_type_obj.get('lnClass'), name)) is None
+             else d.get('presCond')[0]).replace('A', 'C'),  # DONE: Change presCond A to C
              'desc': '' if dob.get('desc') is None else dob.get('desc')}
             for dob in ln_type_obj.findall('61850:DO', ns)
             if ((f := icd.find(f'.//61850:DOType[@id="{dob.get("type")}"]', ns)) is not None)
