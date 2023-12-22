@@ -33,10 +33,10 @@ def get_context(ied_name, icd, nsd, associations):
                                                             "/".join([ln['ldInst'], ln['name'], dob['name']]))})
             usages[-1].update({'dobs': dobs})
         lns[-1].update({'usages': usages})
-
     ct.update({'ld_table': lds,
                'ln_table': lns})
     return ct
+
 
 def report(template, context):
     doc = DocxTemplate(template)
