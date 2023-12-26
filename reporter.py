@@ -38,7 +38,7 @@ def get_context(ied_name, icd, nsd, associations):
     return ct
 
 
-def report(template, context):
+def report(template, context, target):
     doc = DocxTemplate(template)
     doc.render(context)
-    doc.save('generated_doc.docx')
+    doc.save(target)
