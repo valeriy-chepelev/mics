@@ -161,7 +161,7 @@ def list_do(icd, ln_type: str, nsd, usage='Status'):
     dobs = [{'name': (name := dob.get('name')),
              'cdc': cdc,
              'presCond': ('E' if (d := _get_nsd_do(nsd, ln_type_obj.get('lnClass'), name)) is None
-             else d.get('presCond')[0]).replace('A', 'C'),  # DONE: Change presCond A to C
+                          else d.get('presCond')[0]).replace('A', 'C'),  # DONE: Change presCond A to C
              'desc': '' if dob.get('desc') is None else dob.get('desc')}
             for dob in ln_type_obj.findall('61850:DO', ns)
             if ((f := icd.find(f'.//61850:DOType[@id="{dob.get("type")}"]', ns)) is not None)
