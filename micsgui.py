@@ -10,6 +10,8 @@ import tkinter.scrolledtext as scrolled_text
 import tkinter.filedialog
 import logging
 import os
+from reporter import execute_report
+
 
 # Icons graphical data
 img_data_xml = b'iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADrklEQVR4nO2aTWgTQRTHp7b4Qf1AxG8sohW12LQ7s61ShNSTXuytB/UiCKIXbypeLOilIIrV2vbNphV68FCVoiJUvHjSi4ifB09SwZbSdOclrSJqu7JJk0y2u2siNNlk9w97yb55b/a3M2/ezoSQQIECBQoUKCcxjkbhLjHBOA4zTbQSfwLA5AVijgJ2EsOo8CcAnrwo4GVfA2Ag5hjHY54CQBZJTd0zm1TAJsZFF+PiZ3oUcPzBNGwm5Q5AFuPilCU5jqkDU9uIbwCAvsYmH7wJDY5XFyJ+0QEofajaJ0XxtH3IqCTlPwXwmsvK0FmIPhQNgJkMKWDcdXnk4iQpVwAM8OG/l0jxi4E4tNh9KRIA/SAD8WS+BnAbBVFFw9qyzAFSIhx2ByE+1XVPrCTlCCAlNTK1j4K4x7iYdQChkXIGkJIaEQrl+MJmFMwqWnwvKXcACRlGBQW8tDAf4A3iCwDzooARS7/eEj8BUPrwiKVf6CsAVENWsH4xDwJQND1U8gAYxy9SEuvPqy3o9SUNoLE3tivLL+DxfGuDkgbAAM9mHl7MMZjZnE/7xt54XUkDoBwfpIc/4Ie8+wTxPaULoMNYwriYlHzezNeFGont9jSA9iGj0tzczGUJU/r0o+lYgBDuMKryziFeAhAaHK9mgI+dbBmIC5nsL343d0VXZ8UCMSL/Zu8Dd3oSgBKZ3MIAX7vZMi6eSR8yLx1ivWeg1zjFUftxh+cAKMniZNTNtm7IWMoAZyQAV5xjiTFzutjFaugV2z0FgHI8TDnGstd20b3AlyZaZRsV9HB2LHHHUh/MqKC3LfADeo1nAFANT5tzWbahHJ/bJTMK4qpk9722y1gm3zfbmG2zfIH4wzhelO3MQxLPAGCW+xTE5/oeXGvrC8QraYSM2NmYbU0fbnEbeqNbSw5AS2RyVWI3N7MCnP9fAIlkW2pTQAW9zZIjqNWX4xSA2Dnr2YFnAOSaBJOnvum3HzUrQvm+UxKUC6WUQj3TGzwFQPpEdVwGKeDHzFvF+8RGlof/5rQMNvbH13sOgFshtF+b3mjZ3z9DbCQ9/Du3QqjpdmydJwGkSmHK8ZFsSzmekH04nejkWgqbidKzAFIfQxTELal2H5B8jBIHmW1yOf62+/8AWSyxQgXKQ+YI8TWAlkRN4WMAIfOT288ADlz/usLXAMJ3jeW+BlBn7iv4GUC4w6jyNYD2xKarjwEQw6goGgDm0SsAsFhiHni7wQjgRZwCgQIFChSIlJf+AlufylTENow2AAAAAElFTkSuQmCC'
@@ -124,7 +126,9 @@ class MicsApplication(Frame):
         self.mainloop()
 
     def on_mics(self):
-        logging.info(f'Foo {str(self)}')
+        execute_report(self.icd_name.get(),
+                       self.txt_name.get(),
+                       self.ied_name.get())
 
     def on_open_icd(self):
         select = tkinter.filedialog.askopenfilename(title='Open ICD file',
@@ -152,21 +156,6 @@ class MicsApplication(Frame):
                 save_config()
 
     def on_autoname(self):
-        _, fname = os.path.split(self.icd_name.get())
-        name, _ = os.path.splitext(fname)
+        _, filename = os.path.split(self.icd_name.get())
+        name, _ = os.path.splitext(filename)
         self.ied_name.set('IED' if name == '' else name)
-
-
-def ask_target_name(default_name):
-    """Call a standard SaveAs Dialog and return path+name of new docx file.
-    Return empty string in case of user cancel."""
-    target = tkinter.filedialog.asksaveasfilename(defaultextension='docx',
-                                                  filetypes=(("Word file", "*.docx"), ("All Files", "*.*")),
-                                                  initialdir=cfg['save_path'],
-                                                  initialfile=default_name)
-    if target != '':
-        path, _ = os.path.split(target)
-        if cfg['save_path'] != path:
-            cfg['save_path'] = path
-            save_config()
-    return target

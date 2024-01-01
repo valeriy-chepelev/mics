@@ -8,7 +8,8 @@ _default_config = dict(template='MICS_template.docx',
                        auto_name_prefix='MICS-',
                        icd_path='',
                        txt_path='',
-                       save_path='')
+                       save_path='',
+                       nsd='IEC_61850-7-4_2007B.nsd')
 
 
 def save_config():
