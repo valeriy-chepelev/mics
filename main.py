@@ -7,13 +7,13 @@ from micsgui import MicsApplication
 
 def process_args():
     def chk_icd(val):
-        return val if val is not None and re.match('^.+?\.((ICD)|(icd))$', val) else None
+        return val if val is not None and re.match(r'^.+?\.((ICD)|(icd))$', val) else None
 
     def chk_txt(val):
-        return val if val is not None and re.match('^.+?\.((TXT)|(txt))$', val) else None
+        return val if val is not None and re.match(r'^.+?\.((TXT)|(txt))$', val) else None
 
     def chk_ied(val):
-        return val if val is not None and re.match('^[\w,\-_А-Яа-я]{5,40}$', val) else None
+        return val if val is not None and re.match(r'^[\w,\-_А-Яа-я]{5,40}$', val) else None
 
     names = dict(icd=None, txt=None, ied=None)
     names['icd'] = next((r for p in (args.ICD, args.TXT, args.IED) if (r := chk_icd(p)) is not None), None)
@@ -39,9 +39,11 @@ if __name__ == '__main__':
         app = MicsApplication()
         app.start_app()
     else:
-        if (names := process_args())['icd'] is None:
+        params = process_args()
+        if params['icd'] is None:
             # ICD is not defined
             parser.print_help()
         else:
             # normal command execution
-            execute_report(names['ícd'], names['txt'], names['ied'], forceautoname=True)
+            logging.info(f'Creating MICS for "{params["icd"]}", please wait...')
+            execute_report(params['icd'], params['txt'], params['ied'], force_auto_name=True)

@@ -52,7 +52,7 @@ def report(template, context, target):
     doc.save(target)
 
 
-def execute_report(icd_filename, txt_filename, ied_name, forceautoname=False):
+def execute_report(icd_filename, txt_filename, ied_name, force_auto_name=False):
     # load icd
     try:
         icd_tree = xml_tree.parse(icd_filename)
@@ -70,7 +70,7 @@ def execute_report(icd_filename, txt_filename, ied_name, forceautoname=False):
     # load associations
     associations = dict()  # Dummy associations
     try:
-        if txt_filename is not None: #TODO: check to empty string
+        if txt_filename is not None and txt_filename != '':
             associations = read_data(txt_filename)
     except FileNotFoundError:
         logging.error(f'File "{txt_filename}" not found.')
@@ -79,17 +79,17 @@ def execute_report(icd_filename, txt_filename, ied_name, forceautoname=False):
         logging.error(f'File "{txt_filename}" is not an associations file.')
         return
     # define target file
-    head, tail = os.path.split(icd_filename) #TODO: work with path not finished by slash
+    head, tail = os.path.split(icd_filename)
     tgt, _ = os.path.splitext(tail)
-    target_name = cfg['auto_name_prefix'] + tgt + '.docx'
-    target = head + target_name
-    if not (forceautoname or (cfg['auto_name'] == 'True')):
+    target_name = cfg['auto_save_prefix'] + tgt + '.docx'
+    target = os.path.join(head, target_name)
+    if not (force_auto_name or (cfg['auto_save'] == 'True')):
         target = ask_target_name(target_name)
         if target == '':
             return
     # call a report
     report(cfg['template'],
-           get_context(ied_name,
+           get_context(ied_name if ied_name is not None else '',
                        icd_root,
                        nsd_root,
                        associations),

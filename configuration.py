@@ -4,8 +4,8 @@ _config_name = 'micser.ini'
 
 _default_config = dict(template='MICS_template.docx',
                        open_after_save=True,
-                       auto_name=False,
-                       auto_name_prefix='MICS-',
+                       auto_save=False,
+                       auto_save_prefix='MICS-',
                        icd_path='',
                        txt_path='',
                        save_path='',
