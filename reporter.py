@@ -80,7 +80,8 @@ def execute_report(icd_filename, txt_filename, ied_name, force_auto_name=False):
         return
     # define target file
     head, tail = os.path.split(icd_filename)
-    tgt, _ = os.path.splitext(tail)
+    # tgt, _ = os.path.splitext(tail) changed in v.1.1 to ied name
+    tgt = ied_name
     target_name = cfg['auto_save_prefix'] + tgt + '.docx'
     target = os.path.join(head, target_name)
     if not (force_auto_name or (cfg['auto_save'] == 'True')):
@@ -89,7 +90,7 @@ def execute_report(icd_filename, txt_filename, ied_name, force_auto_name=False):
             return
     # call a report
     report(cfg['template'],
-           get_context(ied_name if ied_name is not None else '',
+           get_context(ied_name,
                        icd_root,
                        nsd_root,
                        associations),
@@ -118,3 +119,19 @@ def ask_target_name(default_name):
             cfg['save_path'] = path
             save_config()
     return target
+
+
+def auto_ied_name(icd_filename, txt_filename, ied_name='IED'):
+    """Calculate and return ied name extracted from filename,
+    according to the ini settings"""
+    if cfg['auto_ied'] != 'True':
+        return ied_name
+    if cfg['auto_ied_from'] == 'TXT':
+        fn = icd_filename if txt_filename is None else txt_filename # txt filename can be none if omitted in CLI
+    elif cfg['auto_ied_from'] == 'ICD':
+        fn = icd_filename
+    else:
+        return ied_name
+    _, filename = os.path.split(fn)
+    name, _ = os.path.splitext(filename)
+    return ied_name if name == '' else name

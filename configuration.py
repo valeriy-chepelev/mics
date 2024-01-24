@@ -9,6 +9,8 @@ _default_config = dict(template='MICS_template.docx',
                        icd_path='',
                        txt_path='',
                        save_path='',
+                       auto_ied=True,
+                       auto_ied_from='TXT',
                        nsd='IEC_61850-7-4_2007B.nsd')
 
 

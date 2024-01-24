@@ -1,6 +1,6 @@
 import argparse
 import re
-from reporter import execute_report
+from reporter import execute_report, auto_ied_name
 import logging
 from micsgui import MicsApplication
 
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     # parser
-    parser = argparse.ArgumentParser(description='MICSer - IEC-61850 MICS generator by VCh.',
+    parser = argparse.ArgumentParser(description='MICSer v.1.1 - IEC-61850 MICS generator by VCh.',
                                      epilog='''Place arguments in any order. No arguments - opens GUI.
                                             See additional options in "micser.ini".''')
     parser.add_argument('ICD', nargs='?', help='ICD filename.icd')
@@ -44,6 +44,10 @@ if __name__ == '__main__':
             # ICD is not defined
             parser.print_help()
         else:
+            # check the IED
+            ied_name = auto_ied_name(params['icd'], params['txt']) if params['ied'] is None else params['ied']
             # normal command execution
             logging.info(f'Creating MICS for "{params["icd"]}", please wait...')
-            execute_report(params['icd'], params['txt'], params['ied'], force_auto_name=True)
+            execute_report(params['icd'], params['txt'],
+                           ied_name,
+                           force_auto_name=True)

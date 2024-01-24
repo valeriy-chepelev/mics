@@ -12,7 +12,7 @@ import tkinter.scrolledtext as scrolled_text
 import tkinter.filedialog
 import logging
 import os
-from reporter import execute_report
+from reporter import execute_report, auto_ied_name
 
 # Icons graphical data
 img_data_xml = b'iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADrklEQVR4nO2aTWgTQRTHp7b4Qf1AxG8sohW12LQ7s61ShNSTXuytB/UiCKIXbypeLOilIIrV2vbNphV68FCVoiJUvHjSi4ifB09SwZbSdOclrSJqu7JJk0y2u2siNNlk9w97yb55b/a3M2/ezoSQQIECBQoUKCcxjkbhLjHBOA4zTbQSfwLA5AVijgJ2EsOo8CcAnrwo4GVfA2Ag5hjHY54CQBZJTd0zm1TAJsZFF+PiZ3oUcPzBNGwm5Q5AFuPilCU5jqkDU9uIbwCAvsYmH7wJDY5XFyJ+0QEofajaJ0XxtH3IqCTlPwXwmsvK0FmIPhQNgJkMKWDcdXnk4iQpVwAM8OG/l0jxi4E4tNh9KRIA/SAD8WS+BnAbBVFFw9qyzAFSIhx2ByE+1XVPrCTlCCAlNTK1j4K4x7iYdQChkXIGkJIaEQrl+MJmFMwqWnwvKXcACRlGBQW8tDAf4A3iCwDzooARS7/eEj8BUPrwiKVf6CsAVENWsH4xDwJQND1U8gAYxy9SEuvPqy3o9SUNoLE3tivLL+DxfGuDkgbAAM9mHl7MMZjZnE/7xt54XUkDoBwfpIc/4Ie8+wTxPaULoMNYwriYlHzezNeFGont9jSA9iGj0tzczGUJU/r0o+lYgBDuMKryziFeAhAaHK9mgI+dbBmIC5nsL343d0VXZ8UCMSL/Zu8Dd3oSgBKZ3MIAX7vZMi6eSR8yLx1ivWeg1zjFUftxh+cAKMniZNTNtm7IWMoAZyQAV5xjiTFzutjFaugV2z0FgHI8TDnGstd20b3AlyZaZRsV9HB2LHHHUh/MqKC3LfADeo1nAFANT5tzWbahHJ/bJTMK4qpk9722y1gm3zfbmG2zfIH4wzhelO3MQxLPAGCW+xTE5/oeXGvrC8QraYSM2NmYbU0fbnEbeqNbSw5AS2RyVWI3N7MCnP9fAIlkW2pTQAW9zZIjqNWX4xSA2Dnr2YFnAOSaBJOnvum3HzUrQvm+UxKUC6WUQj3TGzwFQPpEdVwGKeDHzFvF+8RGlof/5rQMNvbH13sOgFshtF+b3mjZ3z9DbCQ9/Du3QqjpdmydJwGkSmHK8ZFsSzmekH04nejkWgqbidKzAFIfQxTELal2H5B8jBIHmW1yOf62+/8AWSyxQgXKQ+YI8TWAlkRN4WMAIfOT288ADlz/usLXAMJ3jeW+BlBn7iv4GUC4w6jyNYD2xKarjwEQw6goGgDm0SsAsFhiHni7wQjgRZwCgQIFChSIlJf+AlufylTENow2AAAAAElFTkSuQmCC'
@@ -97,8 +97,10 @@ class MicsApplication(Frame):
         Label(master=main_pane, text='IED official name:').grid(column=1, row=4, stick="wn")
         Entry(master=main_pane, textvariable=self.ied_name). \
             grid(column=1, row=5, stick="ew", padx=(0, 5))
-        Button(master=main_pane, relief='flat', takefocus=0, image=self.ico_refresh, command=self.on_autoname). \
-            grid(column=0, row=4, stick="nsew", rowspan=2, padx=(5, 0))
+        ub = Button(master=main_pane, relief='flat', takefocus=0, image=self.ico_refresh, command=self.on_autoname)
+        ub.grid(column=0, row=4, stick="nsew", rowspan=2, padx=(5, 0))
+        if cfg['auto_ied'] == 'True':
+            ub.configure(state='disabled')
         # row 6
         self.start_btn = Button(master=main_pane, relief='flat', takefocus=0, command=self.on_mics,
                                 image=self.ico_doc, state='disabled')
@@ -141,6 +143,9 @@ class MicsApplication(Frame):
                                                     initialdir=cfg['icd_path'])
         if os.path.isfile(select):
             self.icd_name.set(select)
+            self.ied_name.set(auto_ied_name(select,
+                                            self.txt_name.get(),
+                                            self.ied_name.get()))
             self.start_btn.configure(state='normal')
             path, _ = os.path.split(select)
             if path != cfg['icd_path']:
@@ -154,12 +159,14 @@ class MicsApplication(Frame):
                                                     initialdir=cfg['txt_path'])
         if os.path.isfile(select):
             self.txt_name.set(select)
+            self.ied_name.set(auto_ied_name(self.icd_name.get(),
+                                            select,
+                                            self.ied_name.get()))
             path, _ = os.path.split(select)
             if path != cfg['txt_path']:
                 cfg['txt_path'] = path
                 save_config()
 
     def on_autoname(self):
-        _, filename = os.path.split(self.icd_name.get())
-        name, _ = os.path.splitext(filename)
-        self.ied_name.set('IED' if name == '' else name)
+        self.ied_name.set(auto_ied_name(self.icd_name.get(),
+                                        self.txt_name.get()))
